@@ -1,0 +1,85 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: init-latest-docs
+  image: alpine/git
+  commands:
+  - mkdir -p .tmp docs swagger 
+  # - mkdir -p i18n/fr-fr/docusaurus-plugin-content-docs/current
+  # - mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/current
+  # - mkdir -p i18n/zh-tw/docusaurus-plugin-content-docs/current
+  - git clone --depth=1 --branch=main https://github.com/go-gitea/gitea.git .tmp/upstream-docs-latest
+  # if static images conflict, uhh.. ignore that
+  - cp -r .tmp/upstream-docs-latest/docs/static/* static/
+  - apk add --no-cache rsync bash
+  - rsync -avz --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ docs/
+  # - rsync -avz --prune-empty-dirs --include '*/' --include='*.fr-fr.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ i18n/fr-fr/docusaurus-plugin-content-docs/current
+  # - rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ i18n/zh-cn/docusaurus-plugin-content-docs/current
+  # - rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-tw.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ i18n/zh-tw/docusaurus-plugin-content-docs/current
+  - cp .tmp/upstream-docs-latest/docs/content/page/index.en-us.md docs/intro.md
+  - cp .tmp/upstream-docs-latest/templates/swagger/v1_json.tmpl static/latest-swagger.json
+  - bash loop_docs.sh
+  - rm docs/help/search.en-us.md
+  - rm -rf .tmp/upstream-docs-latest
+  #depends_on: [clone]
+
+- name: init-18-docs
+  image: alpine/git
+  commands:
+  - mkdir -p .tmp versioned_docs/version-1.18 swagger
+  # - mkdir -p i18n/fr-fr/docusaurus-plugin-content-docs/version-1.18
+  # - mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/version-1.18
+  # - mkdir -p i18n/zh-tw/docusaurus-plugin-content-docs/version-1.18
+  - git clone --depth=1 --branch=release/v1.17 https://github.com/go-gitea/gitea.git .tmp/upstream-docs-18
+  # if static images conflict, uhh.. ignore that
+  - cp -r .tmp/upstream-docs-18/docs/static/* static/
+  - apk add --no-cache rsync bash
+  - rsync -avz --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-18/docs/content/doc/ versioned_docs/version-1.18/
+  # - rsync -avz --prune-empty-dirs --include '*/' --include='*.fr-fr.md' --exclude '*' .tmp/upstream-docs-18/docs/content/doc/ i18n/fr-fr/docusaurus-plugin-content-docs/version-1.18
+  # - rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs-18/docs/content/doc/ i18n/zh-cn/docusaurus-plugin-content-docs/version-1.18
+  # - rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-tw.md' --exclude '*' .tmp/upstream-docs-18/docs/content/doc/ i18n/zh-tw/docusaurus-plugin-content-docs/version-1.18
+  - cp .tmp/upstream-docs-18/docs/content/page/index.en-us.md versioned_docs/version-1.18/intro.md
+  - cp .tmp/upstream-docs-18/templates/swagger/v1_json.tmpl static/18-swagger.json
+  - bash loop_docs-18.sh
+  - rm versioned_docs/version-1.18/help/search.en-us.md
+  - rm -rf .tmp/upstream-docs-18
+  #depends_on: [clone]
+
+- name: init-17-docs
+  image: alpine/git
+  commands:
+  - mkdir -p .tmp versioned_docs/version-1.17 swagger
+  # - mkdir -p i18n/fr-fr/docusaurus-plugin-content-docs/version-1.17
+  # - mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/version-1.17
+  # - mkdir -p i18n/zh-tw/docusaurus-plugin-content-docs/version-1.17
+  - git clone --depth=1 --branch=release/v1.17 https://github.com/go-gitea/gitea.git .tmp/upstream-docs-17
+  # if static images conflict, uhh.. ignore that
+  - cp -r .tmp/upstream-docs-17/docs/static/* static/
+  - apk add --no-cache rsync bash
+  - rsync -avz --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-17/docs/content/doc/ versioned_docs/version-1.17/
+  # - rsync -avz --prune-empty-dirs --include '*/' --include='*.fr-fr.md' --exclude '*' .tmp/upstream-docs-17/docs/content/doc/ i18n/fr-fr/docusaurus-plugin-content-docs/version-1.17
+  # - rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs-17/docs/content/doc/ i18n/zh-cn/docusaurus-plugin-content-docs/version-1.17
+  # - rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-tw.md' --exclude '*' .tmp/upstream-docs-17/docs/content/doc/ i18n/zh-tw/docusaurus-plugin-content-docs/version-1.17
+  - cp .tmp/upstream-docs-17/docs/content/page/index.en-us.md versioned_docs/version-1.17/intro.md
+  - cp .tmp/upstream-docs-17/templates/swagger/v1_json.tmpl static/17-swagger.json
+  - bash loop_docs-17.sh
+  - rm versioned_docs/version-1.17/help/search.en-us.md
+  - rm -rf .tmp/upstream-docs-17
+  #depends_on: [clone]
+
+- name: docusaurus
+  image: node:18
+  commands:
+  - rm static/_*
+  - yarn install
+  - yarn build
+  #depends_on: [init-latest-docs, init-17-docs, init-18-docs]
+
+- name: publish-docs
+  image: node:18
+  commands:
+  - echo "publish docs here"
+  #depends_on: [docusaurus]

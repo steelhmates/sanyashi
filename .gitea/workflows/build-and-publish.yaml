@@ -1,0 +1,58 @@
+name: Build and Publish Docs site
+run-name: docusaurus build docs site
+on: [push]
+jobs:
+  Explore-Gitea-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: make temporary directories
+        run: |
+          mkdir -p .tmp docs versioned_docs/version-1.18
+          apt update -y && apt install -y rsync python python3-pip
+          pip install awscli
+
+      - name: cloning remote repos
+        run: |
+          git clone --depth=1 --branch=main https://github.com/go-gitea/gitea.git .tmp/upstream-docs-latest
+          git clone --depth=1 --branch=release/v1.18 https://github.com/go-gitea/gitea.git .tmp/upstream-docs-18
+
+      - name: build nightly docs
+        run: |
+          cp -r .tmp/upstream-docs-latest/docs/static/* static/
+          rsync -avz --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ docs/
+          cp .tmp/upstream-docs-latest/docs/content/page/index.en-us.md docs/intro.md
+          cp .tmp/upstream-docs-latest/templates/swagger/v1_json.tmpl static/latest-swagger.json
+          bash loop_docs.sh
+          rm docs/help/search.en-us.md
+          rm -rf .tmp/upstream-docs-latest
+
+      - name: 1.18 docs
+        run: |
+          cp -r .tmp/upstream-docs-18/docs/static/* static/
+          rsync -avz --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-18/docs/content/doc/ versioned_docs/version-1.18/
+          cp .tmp/upstream-docs-18/docs/content/page/index.en-us.md versioned_docs/version-1.18/intro.md
+          cp .tmp/upstream-docs-18/templates/swagger/v1_json.tmpl static/18-swagger.json
+          bash loop_docs-18.sh
+          rm versioned_docs/version-1.18/help/search.en-us.md
+          rm -rf .tmp/upstream-docs-18
+      - name: cleanup before build
+        run: |
+          rm static/_*
+      - name: build site
+        run: |
+          npm ci
+          npm run build
+      - name: aws credential configure
+        uses: techknowlogick/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{ secrets.AWS_REGION}}
+      - name: Copy files to the production website with the AWS CLI
+        run: |
+          aws s3 sync build/ s3://docs-gitea-com
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION}} --paths '/*'
