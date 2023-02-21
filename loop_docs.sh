@@ -16,7 +16,7 @@ for file in `find ./docs/ -name "*.md"`; do
     # note only works on linux, forget about it when attempting to run on macos
     # hide hugo toc
     sed -i 's/{{< toc >}}//' $file
-    sed -i 's/{{< version >}}/1.18.2/g' $file
+    sed -i 's/{{< version >}}/1.18.5/g' $file
     sed -i 's/{{< relref "doc/\/docs/g' $file
     sed -i 's/" >}}//g' $file
     sed -i 's/\*\*Table of Contents\*\*//' $file
