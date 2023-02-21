@@ -9,13 +9,13 @@ sed -i 's/^title:.*/displayed_sidebar: mySidebar/' versioned_docs/version-1.18/i
 sed -i 's/^slug:.*/slug: \//' versioned_docs/version-1.18/intro.md
 sed -i 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' versioned_docs/version-1.18/developers/hacking-on-gitea.en-us.md
 
-sed -i 's/"version":.*/"version":"1.18.2"/' static/18-swagger.json
+sed -i 's/"version":.*/"version":"1.18.5"/' static/18-swagger.json
 
 for file in `find ./versioned_docs/version-1.18/ -name "*.md"`; do
     # note only works on linux, forget about it when attempting to run on macos
     # hide hugo toc
     sed -i 's/{{< toc >}}//' $file
-    sed -i 's/{{< version >}}/1.18.2/g' $file
+    sed -i 's/{{< version >}}/1.18.5/g' $file
     sed -i 's/{{< relref "doc/\/docs/g' $file
     sed -i 's/" >}}//g' $file
     sed -i 's/\*\*Table of Contents\*\*//' $file
