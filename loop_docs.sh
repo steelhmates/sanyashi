@@ -10,7 +10,7 @@ sed -i 's/^title:.*/displayed_sidebar: mySidebar/' docs/intro.md
 sed -i 's/^slug:.*/slug: \//' docs/intro.md
 sed -i 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' docs/developers/hacking-on-gitea.en-us.md
 
-sed -i 's/"version":.*/"version":"1.19-dev"/' static/latest-swagger.json
+sed -i 's/"version":.*/"version":"1.20-dev"/' static/latest-swagger.json
 
 for file in `find ./docs/ -name "*.md"`; do
     # note only works on linux, forget about it when attempting to run on macos
