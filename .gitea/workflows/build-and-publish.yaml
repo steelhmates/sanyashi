@@ -1,6 +1,12 @@
 name: Build and Publish Docs site
 run-name: docusaurus build docs site
-on: [push]
+
+on:
+  push:
+    branches:
+      - main
+      - techknowlogick-patch-1
+
 jobs:
   Explore-Gitea-Actions:
     runs-on: ubuntu-latest
