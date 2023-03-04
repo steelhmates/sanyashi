@@ -3,7 +3,7 @@
 set -xe
 
 sed -i 's/<empty/<&#8288;empty/' versioned_docs/version-1.19/advanced/config-cheat-sheet.en-us.md
-sed -i 's/<>/<&#8288;>/' versioned_docs/version-1.19/developers/guidelines-backend.en-us.md
+sed -i 's/</&#8288;/' versioned_docs/version-1.19/developers/guidelines-backend.en-us.md
 sed -i 's/^url:.*//' versioned_docs/version-1.19/intro.md
 sed -i 's/^title:.*/displayed_sidebar: mySidebar/' versioned_docs/version-1.19/intro.md
 sed -i 's/^slug:.*/slug: \//' versioned_docs/version-1.19/intro.md
