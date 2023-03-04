@@ -36,7 +36,7 @@ const config = {
               label: '1.20-dev', // path is kept as next for dev (so users can always find "nightly" docs)
             },
             1.19 : {
-              label: '1.19.0-RC0'
+              label: '1.19.0-rc0'
             }
           },
         },
