@@ -73,8 +73,8 @@ const config = {
         respectPrefersColorScheme: true,
       },
       announcementBar: {
-        id: 'announcementBar-1', // Increment on change
-        content: `The updated documentation site is a work in progress. If you find any issues, please <a target="_blank" rel="noopener noreferrer" href="https://github.com/go-gitea/gitea/issues">let us know</a>. Translated documentation is also a work in progress.`,
+        id: 'announcementBar-2', // Increment on change
+        content: `The updated documentation site is a work in progress. If you find any issues, please <a target="_blank" rel="noopener noreferrer" href="https://gitea.com/gitea/gitea-docusaurus/issues">let us know</a>. Translated documentation is also a work in progress.`,
       },
       navbar: {
         title: 'Gitea',
