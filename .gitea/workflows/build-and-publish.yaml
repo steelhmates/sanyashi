@@ -8,7 +8,7 @@ on:
       - techknowlogick-patch-1
 
 jobs:
-  Explore-Gitea-Actions:
+  build-docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
