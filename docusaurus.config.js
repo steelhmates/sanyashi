@@ -33,12 +33,8 @@ const config = {
           },
           versions: {
             current: {
-              label: '1.19-dev',
-              //path: '1.19-dev', // path is next (so users can always find "nightly" docs)
+              label: '1.20-dev', // path is kept as next for dev (so users can always find "nightly" docs)
             },
-//             '1.17': {
-//               banner: 'none',
-//             },
           },
         },
         blog: false,
