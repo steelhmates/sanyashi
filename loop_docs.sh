@@ -2,14 +2,14 @@
 
 set -xe
 
-sed -i 's/<empty/<&#8288;empty/' docs/advanced/config-cheat-sheet.en-us.md
-sed -i 's/<empty/<&#8288;empty/' docs/developers/guidelines-backend.en-us.md
-sed -i 's/</<&#8288;/' docs/developers/guidelines-backend.en-us.md
-sed -i 's/</&#8288;/' docs/developers/guidelines-backend.en-us.md
+sed -i 's/<empty/<&#8288;empty/' docs/administration/config-cheat-sheet.en-us.md
+sed -i 's/<empty/<&#8288;empty/' docs/contributing/guidelines-backend.en-us.md
+sed -i 's/</<&#8288;/' docs/contributing/guidelines-backend.en-us.md
+sed -i 's/</&#8288;/' docs/contributing/guidelines-backend.en-us.md
 sed -i 's/^url:.*//' docs/intro.md
 sed -i 's/^title:.*/displayed_sidebar: mySidebar/' docs/intro.md
 sed -i 's/^slug:.*/slug: \//' docs/intro.md
-sed -i 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' docs/developers/hacking-on-gitea.en-us.md
+sed -i 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' docs/development/hacking-on-gitea.en-us.md
 
 sed -i 's/"version":.*/"version":"1.20-dev"/' static/latest-swagger.json
 
