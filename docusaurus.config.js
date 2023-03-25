@@ -37,9 +37,6 @@ const config = {
             },
             1.19 : {
               label: '1.19.0'
-            },
-            1.18 : {
-              banner: 'none'
             }
           },
         },
