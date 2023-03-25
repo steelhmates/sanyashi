@@ -21,6 +21,7 @@ for file in `find ./docs/ -name "*.md"`; do
     sed -i 's/{{< relref "doc/\/docs/g' $file
     sed -i 's/" >}}//g' $file
     sed -i 's/\*\*Table of Contents\*\*//' $file
+    sed -i 's/weight:/sidebar_position:/g' $file
 done
 
 for file in `find ./docs/usage/ -name "*.md"`; do
