@@ -43,20 +43,3 @@ for file in versioned_docs/version-1.19/*; do
     fi
     rm $file
 done
-
-# for file in `find ./versioned_docs/version-1.19/ -name "*.md"`; do
-#     trimmed=$(echo $file | cut -f 2 -d '.')
-#     mv $file .$trimmed.md
-# done
-# for file in `find ./i18n/zh-tw/docusaurus-plugin-content-docs/version-1.19/ -name "*.md"`; do
-#     trimmed=$(echo $file | cut -f 2 -d '.')
-#     mv $file .$trimmed.md
-# done
-# for file in `find ./i18n/fr-fr/docusaurus-plugin-content-docs/version-1.19/ -name "*.md"`; do
-#     trimmed=$(echo $file | cut -f 2 -d '.')
-#     mv $file .$trimmed.md
-# done
-# for file in `find ./i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/ -name "*.md"`; do
-#     trimmed=$(echo $file | cut -f 2 -d '.')
-#     mv $file .$trimmed.md
-# done

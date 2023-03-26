@@ -44,22 +44,3 @@ for file in docs/*; do
     fi
     rm $file
 done
-
-
-# for file in `find ./docs/ -name "*.md"`; do
-#     trimmed=$(echo $file | cut -f 2 -d '.')
-#     mv $file .$trimmed.md
-# done
-
-# for file in `find ./i18n/zh-tw/docusaurus-plugin-content-docs/current/ -name "*.md"`; do
-#     trimmed=$(echo $file | cut -f 2 -d '.')
-#     mv $file .$trimmed.md
-# done
-# for file in `find ./i18n/fr-fr/docusaurus-plugin-content-docs/current/ -name "*.md"`; do
-#     trimmed=$(echo $file | cut -f 2 -d '.')
-#     mv $file .$trimmed.md
-# done
-# for file in `find ./i18n/zh-cn/docusaurus-plugin-content-docs/current/ -name "*.md"`; do
-#     trimmed=$(echo $file | cut -f 2 -d '.')
-#     mv $file .$trimmed.md
-# done
