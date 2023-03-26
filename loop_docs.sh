@@ -2,33 +2,37 @@
 
 set -xe
 
-sed -i 's/<empty/<&#8288;empty/' docs/administration/config-cheat-sheet.en-us.md
-sed -i 's/<empty/<&#8288;empty/' docs/contributing/guidelines-backend.en-us.md
-sed -i 's/</<&#8288;/' docs/contributing/guidelines-backend.en-us.md
-sed -i 's/</&#8288;/' docs/contributing/guidelines-backend.en-us.md
-sed -i 's/^url:.*//' docs/intro.md
-sed -i 's/^title:.*/displayed_sidebar: mySidebar/' docs/intro.md
-sed -i 's/^slug:.*/slug: \//' docs/intro.md
-sed -i 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' docs/development/hacking-on-gitea.en-us.md
+if sed --version 2>/dev/null | grep -q GNU; then
+    SED_INPLACE="sed -i"
+else
+    SED_INPLACE="sed -i ''"
+fi
 
-sed -i 's/"version":.*/"version":"1.20-dev"/' static/latest-swagger.json
+$SED_INPLACE 's/<empty/<&#8288;empty/' docs/administration/config-cheat-sheet.en-us.md
+$SED_INPLACE 's/<empty/<&#8288;empty/' docs/contributing/guidelines-backend.en-us.md
+$SED_INPLACE 's/</<&#8288;/' docs/contributing/guidelines-backend.en-us.md
+$SED_INPLACE 's/</&#8288;/' docs/contributing/guidelines-backend.en-us.md
+$SED_INPLACE 's/^url:.*//' docs/intro.md
+$SED_INPLACE 's/^title:.*/displayed_sidebar: mySidebar/' docs/intro.md
+$SED_INPLACE 's/^slug:.*/slug: \//' docs/intro.md
+$SED_INPLACE 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' docs/development/hacking-on-gitea.en-us.md
+
+$SED_INPLACE 's/"version":.*/"version":"1.20-dev"/' static/latest-swagger.json
 
 for file in `find ./docs/ -name "*.md"`; do
-    # note only works on linux, forget about it when attempting to run on macos
     # hide hugo toc
-    sed -i 's/{{< toc >}}//' $file
-    sed -i 's/{{< version >}}/1.18.5/g' $file
-    sed -i 's/{{< relref "doc/\/docs/g' $file
-    sed -i 's/" >}}//g' $file
-    sed -i 's/\*\*Table of Contents\*\*//' $file
-    sed -i 's/weight:/sidebar_position:/g' $file
+    $SED_INPLACE 's/{{< toc >}}//' $file
+    $SED_INPLACE 's/{{< version >}}/1.18.5/g' $file
+    $SED_INPLACE 's/{{< relref "doc/\/docs/g' $file
+    $SED_INPLACE 's/" >}}//g' $file
+    $SED_INPLACE 's/\*\*Table of Contents\*\*//' $file
+    $SED_INPLACE 's/weight:/sidebar_position:/g' $file
     #sed -i 's/^slug:.*//' $file
 done
 
 for file in `find ./docs/usage/ -name "*.md"`; do
-    # note only works on linux, forget about it when attempting to run on macos
     # hide hugo toc
-    sed -i 's/title:.*//' $file
+    $SED_INPLACE 's/title:.*//' $file
 done
 
 for file in docs/*; do
