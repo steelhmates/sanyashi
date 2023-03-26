@@ -19,6 +19,7 @@ for file in `find ./versioned_docs/version-1.19/ -name "*.md"`; do
     sed -i 's/" >}}//g' $file
     sed -i 's/\*\*Table of Contents\*\*//' $file
     sed -i 's/weight:/sidebar_position:/g' $file
+    sed -i 's/^slug:.*///' $file
 done
 
 sed -i 's/</&#8288;/' versioned_docs/version-1.19/contributing/guidelines-backend.en-us.md
