@@ -30,7 +30,7 @@ jobs:
       - name: build nightly docs
         run: |
           cp -r .tmp/upstream-docs-latest/docs/static/* static/
-          rsync -avz --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ docs/
+          rsync -a --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ docs/
           cp .tmp/upstream-docs-latest/docs/content/page/index.en-us.md docs/intro.md
           cp .tmp/upstream-docs-latest/templates/swagger/v1_json.tmpl static/latest-swagger.json
           bash loop_docs.sh
@@ -39,7 +39,7 @@ jobs:
       - name: 1.19 docs
         run: |
           cp -r .tmp/upstream-docs-19/docs/static/* static/
-          rsync -avz --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-19/docs/content/doc/ versioned_docs/version-1.19/
+          rsync -a --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-19/docs/content/doc/ versioned_docs/version-1.19/
           cp .tmp/upstream-docs-19/docs/content/page/index.en-us.md versioned_docs/version-1.19/intro.md
           cp .tmp/upstream-docs-19/templates/swagger/v1_json.tmpl static/19-swagger.json
           bash loop_docs-19.sh
