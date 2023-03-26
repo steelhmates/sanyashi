@@ -22,7 +22,7 @@ for file in `find ./docs/ -name "*.md"`; do
     sed -i 's/" >}}//g' $file
     sed -i 's/\*\*Table of Contents\*\*//' $file
     sed -i 's/weight:/sidebar_position:/g' $file
-    sed -i 's/^slug:.*///' $file
+    sed -i 's/^slug:.*//' $file
 done
 
 for file in `find ./docs/usage/ -name "*.md"`; do
