@@ -22,3 +22,7 @@ yarn-error.log*
 .tmp/
 docs/
 versioned_docs/
+static/_headers
+static/_redirects
+static/latest-swagger.json
+static/19-swagger.json

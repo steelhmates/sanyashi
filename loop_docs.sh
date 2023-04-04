@@ -13,7 +13,7 @@ $SED_INPLACE 's/<empty/<&#8288;empty/' docs/contributing/guidelines-backend.en-u
 $SED_INPLACE 's/</<&#8288;/' docs/contributing/guidelines-backend.en-us.md
 $SED_INPLACE 's/</&#8288;/' docs/contributing/guidelines-backend.en-us.md
 $SED_INPLACE 's/^url:.*//' docs/intro.md
-$SED_INPLACE 's/^title:.*/displayed_sidebar: mySidebar/' docs/intro.md
+$SED_INPLACE 's/^title:.*/displayed_sidebar: defaultSidebar/' docs/intro.md
 $SED_INPLACE 's/^slug:.*/slug: \//' docs/intro.md
 $SED_INPLACE 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' docs/development/hacking-on-gitea.en-us.md
 

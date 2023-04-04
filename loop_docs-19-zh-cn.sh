@@ -18,7 +18,7 @@ $SED_INPLACE 's/<empty/<&#8288;empty/' versioned_docs/version-1.19/zh-cn/contrib
 $SED_INPLACE 's/<empty/<&#8288;empty/' versioned_docs/version-1.19/zh-cn/administration/config-cheat-sheet.zh-cn.md
 
 $SED_INPLACE 's/^url:.*//' versioned_docs/version-1.19/zh-cn/intro.md
-$SED_INPLACE 's/^title:.*/displayed_sidebar: mySidebar/' versioned_docs/version-1.19/zh-cn/intro.md
+$SED_INPLACE 's/^title:.*/displayed_sidebar: siderBarCN/' versioned_docs/version-1.19/zh-cn/intro.md
 $SED_INPLACE 's/^slug:.*/slug: \/zh-cn\//' versioned_docs/version-1.19/zh-cn/intro.md
 $SED_INPLACE 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' versioned_docs/version-1.19/zh-cn/development/hacking-on-gitea.zh-cn.md
 
@@ -29,9 +29,10 @@ for file in `find ./versioned_docs/version-1.19/zh-cn/ -name "*.md"`; do
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
     $SED_INPLACE 's/{{< version >}}/1.19.0/g' $file
-    $SED_INPLACE 's/{{< relref "doc/\/docs/g' $file
+    $SED_INPLACE 's/{{< relref "doc/\/docs\/zh-cn/g' $file
     $SED_INPLACE 's/" >}}//g' $file
     $SED_INPLACE 's/\*\*Table of Contents\*\*//' $file
+    $SED_INPLACE 's/weight:/sidebar_position:/g' $file
 done
 
 for file in `find ./versioned_docs/version-1.19/zh-cn/usage/ -name "*.md"`; do

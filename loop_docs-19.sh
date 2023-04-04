@@ -10,7 +10,7 @@ fi
 
 $SED_INPLACE 's/<empty/<&#8288;empty/' versioned_docs/version-1.19/administration/config-cheat-sheet.en-us.md
 $SED_INPLACE 's/^url:.*//' versioned_docs/version-1.19/intro.md
-$SED_INPLACE 's/^title:.*/displayed_sidebar: mySidebar/' versioned_docs/version-1.19/intro.md
+$SED_INPLACE 's/^title:.*/displayed_sidebar: defaultSidebar/' versioned_docs/version-1.19/intro.md
 $SED_INPLACE 's/^slug:.*/slug: \//' versioned_docs/version-1.19/intro.md
 $SED_INPLACE 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' versioned_docs/version-1.19/development/hacking-on-gitea.en-us.md
 
@@ -19,7 +19,7 @@ $SED_INPLACE 's/"version":.*/"version":"1.19.0"/' static/19-swagger.json
 for file in `find ./versioned_docs/version-1.19/ -name "*.md"`; do
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
-    $SED_INPLACE 's/{{< version >}}/1.18.5/g' $file
+    $SED_INPLACE 's/{{< version >}}/1.19.0/g' $file
     $SED_INPLACE 's/{{< relref "doc/\/docs/g' $file
     $SED_INPLACE 's/" >}}//g' $file
     $SED_INPLACE 's/\*\*Table of Contents\*\*//' $file
