@@ -16,7 +16,7 @@ const config = {
 
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'/*, 'fr-fr', 'zh-cn', 'zh-tw'*/], // temporarily disable other locales
+    locales: ['en'/*, 'zh-cn', 'fr-fr', 'zh-tw'*/], // temporarily disable other locales
   },
 
   presets: [
@@ -92,6 +92,10 @@ const config = {
           },
           {
             type: 'search',
+            position: 'right',
+          },
+          {
+            type: 'localeDropdown',
             position: 'right',
           },
           {
