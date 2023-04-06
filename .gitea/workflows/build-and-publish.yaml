@@ -20,31 +20,12 @@ jobs:
           mkdir -p .tmp docs versioned_docs/version-1.18
           apt update -y && apt install -y rsync python python3-pip
           pip install awscli
-
-      - name: cloning remote repos
-        run: |
-          git clone --depth=1 --branch=main https://github.com/go-gitea/gitea.git .tmp/upstream-docs-latest
-          git clone --depth=1 --branch=release/v1.18 https://github.com/go-gitea/gitea.git .tmp/upstream-docs-18
-          git clone --depth=1 --branch=release/v1.19 https://github.com/go-gitea/gitea.git .tmp/upstream-docs-19
-
       - name: build nightly docs
         run: |
-          cp -r .tmp/upstream-docs-latest/docs/static/* static/
-          rsync -a --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ docs/
-          cp .tmp/upstream-docs-latest/docs/content/page/index.en-us.md docs/intro.md
-          cp .tmp/upstream-docs-latest/templates/swagger/v1_json.tmpl static/latest-swagger.json
-          bash loop_docs.sh
-          rm docs/help/search.en-us.md
-          rm -rf .tmp/upstream-docs-latest
+          make prepare-latest prepare-latest-zh-cn
       - name: 1.19 docs
         run: |
-          cp -r .tmp/upstream-docs-19/docs/static/* static/
-          rsync -a --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-19/docs/content/doc/ versioned_docs/version-1.19/
-          cp .tmp/upstream-docs-19/docs/content/page/index.en-us.md versioned_docs/version-1.19/intro.md
-          cp .tmp/upstream-docs-19/templates/swagger/v1_json.tmpl static/19-swagger.json
-          bash loop_docs-19.sh
-          rm versioned_docs/version-1.19/help/search.en-us.md
-          rm -rf .tmp/upstream-docs-19
+          make prepare\#19 prepare-zh-cn\#19
       - name: cleanup before build
         run: |
           rm static/_*
