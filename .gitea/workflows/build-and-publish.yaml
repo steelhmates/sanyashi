@@ -15,15 +15,14 @@ jobs:
       - uses: https://github.com/actions/setup-node@v3
         with:
           node-version: 16
-      - name: make temporary directories
+      - name: install necessary tools
         run: |
-          mkdir -p .tmp docs versioned_docs/version-1.18
           apt update -y && apt install -y rsync python python3-pip
           pip install awscli
-      - name: build nightly docs
+      - name: prepare nightly docs
         run: |
           make prepare-latest prepare-latest-zh-cn
-      - name: 1.19 docs
+      - name: prepare 1.19 docs
         run: |
           make prepare\#19 prepare-zh-cn\#19
       - name: cleanup before build
