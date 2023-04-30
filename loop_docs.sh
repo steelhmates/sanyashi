@@ -42,5 +42,5 @@ for file in docs/*; do
     if [ "$file" == "docs/intro.md" ]; then
         continue
     fi
-    rm $file
+    rm $file || true
 done
