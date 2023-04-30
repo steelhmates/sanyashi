@@ -25,14 +25,13 @@ prepare-latest: clone_main
 	cp .tmp/upstream-docs-latest/docs/content/page/index.en-us.md docs/intro.md
 	cp .tmp/upstream-docs-latest/templates/swagger/v1_json.tmpl static/latest-swagger.json
 	bash loop_docs.sh
-	rm docs/help/search.en-us.md
+	rm docs/help/search.en-us.md || true
 
 .PHONY: prepare-latest-zh-cn
 prepare-latest-zh-cn: clone_main
 	cp -r .tmp/upstream-docs-latest/docs/static/* static/
 	rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ docs/zh-cn/
 	cp .tmp/upstream-docs-latest/docs/content/page/index.zh-cn.md docs/zh-cn/intro.md
-	cp .tmp/upstream-docs-latest/templates/swagger/v1_json.tmpl static/latest-swagger.json
 	bash loop_docs-zh-cn.sh
 	rm docs/zh-cn/help/search.zh-cn.md
 
@@ -57,7 +56,6 @@ prepare-zh-cn\#%: clone_\#%
 	cp -r .tmp/upstream-docs-$*/docs/static/* static/
 	rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs-$*/docs/content/doc/ versioned_docs/version-1.$*/zh-cn/
 	cp .tmp/upstream-docs-19/docs/content/page/index.zh-cn.md versioned_docs/version-1.$*/zh-cn/intro.md
-	cp .tmp/upstream-docs-19/templates/swagger/v1_json.tmpl static/$*-swagger.json
 	bash loop_docs-$*-zh-cn.sh
 	rm versioned_docs/version-1.$*/zh-cn/help/search.zh-cn.md
 
