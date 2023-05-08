@@ -14,12 +14,12 @@ $SED_INPLACE 's/^title:.*/displayed_sidebar: defaultSidebar/' versioned_docs/ver
 $SED_INPLACE 's/^slug:.*/slug: \//' versioned_docs/version-1.19/intro.md
 $SED_INPLACE 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' versioned_docs/version-1.19/development/hacking-on-gitea.en-us.md
 
-$SED_INPLACE 's/"version":.*/"version":"1.19.2"/' static/19-swagger.json
+$SED_INPLACE 's/"version":.*/"version":"1.19.3"/' static/19-swagger.json
 
 for file in `find ./versioned_docs/version-1.19/ -name "*.md"`; do
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
-    $SED_INPLACE 's/{{< version >}}/1.19.2/g' $file
+    $SED_INPLACE 's/{{< version >}}/1.19.3/g' $file
     $SED_INPLACE 's/{{< relref "doc/\/docs/g' $file
     $SED_INPLACE 's/" >}}//g' $file
     $SED_INPLACE 's/\*\*Table of Contents\*\*//' $file
