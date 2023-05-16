@@ -85,7 +85,7 @@ module.exports = {
           }
       ]
     },
-  ],
+  ]/*,
   siderBarCN: [
     {
       type: 'link',
@@ -162,5 +162,5 @@ module.exports = {
           }
       ]
     },
-  ],
+  ],*/
 };
