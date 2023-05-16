@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - techknowlogick-patch-1
 
 jobs:
   build-docs:
@@ -21,10 +20,12 @@ jobs:
           pip install awscli
       - name: prepare nightly docs
         run: |
-          make prepare-latest prepare-latest-zh-cn
+          make prepare-latest
+          #prepare-latest-zh-cn
       - name: prepare 1.19 docs
         run: |
-          make prepare\#19 prepare-zh-cn\#19
+          make prepare\#19
+          #prepare-zh-cn\#19
       - name: cleanup before build
         run: |
           rm static/_*
