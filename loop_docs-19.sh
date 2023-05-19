@@ -29,11 +29,6 @@ done
 
 $SED_INPLACE 's/</&#8288;/' versioned_docs/version-1.19/contributing/guidelines-backend.en-us.md
 
-for file in `find ./versioned_docs/version-1.19/usage/ -name "*.md"`; do
-    # hide hugo toc
-    $SED_INPLACE 's/title:.*//' $file
-done
-
 for file in versioned_docs/version-1.19/*; do
     if [ -d $file ]; then
         continue

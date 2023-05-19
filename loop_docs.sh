@@ -30,11 +30,6 @@ for file in `find ./docs/ -name "*.md"`; do
     #sed -i 's/^slug:.*//' $file
 done
 
-for file in `find ./docs/usage/ -name "*.md"`; do
-    # hide hugo toc
-    $SED_INPLACE 's/title:.*//' $file
-done
-
 for file in docs/*; do
     if [ -d $file ]; then
         continue
