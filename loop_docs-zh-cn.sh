@@ -35,12 +35,6 @@ for file in `find ./docs/zh-cn/ -name "*.md"`; do
     $SED_INPLACE 's/weight:/sidebar_position:/g' $file
 done
 
-for file in `find ./docs/zh-cn/usage/ -name "*.md"`; do
-    # note only works on linux, forget about it when attempting to run on macos
-    # hide hugo toc
-    $SED_INPLACE 's/title:.*//' $file
-done
-
 for file in docs/zh-cn/*; do
     if [ -d $file ]; then
         continue
