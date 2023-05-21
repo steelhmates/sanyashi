@@ -25,7 +25,6 @@ prepare-latest: clone_main
 	cp .tmp/upstream-docs-latest/docs/content/page/index.en-us.md docs/intro.md
 	cp .tmp/upstream-docs-latest/templates/swagger/v1_json.tmpl static/latest-swagger.json
 	bash loop_docs.sh
-	rm docs/help/search.en-us.md || true
 
 .PHONY: prepare-latest-zh-cn
 prepare-latest-zh-cn: clone_main
