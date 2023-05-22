@@ -4,6 +4,15 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+// order usage directory by type first
+function sortItemsByCategory(items) {
+  // type with "category" (directory) first
+  const sortedItems = items.sort(function(a, b) {
+    return a.type.localeCompare(b.type);
+  })
+  return sortedItems;
+}
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Gitea Documentation',
@@ -37,6 +46,16 @@ const config = {
             },
             1.19 : {
               label: '1.19.3'
+            }
+          },
+          async sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
+            const {item} = args;
+            // Use the provided data to generate a custom sidebar slice
+            const sidebarItems = await defaultSidebarItemsGenerator(args);
+            if (item.dirName !== 'usage') {
+              return sidebarItems;
+            } else {
+              return sortItemsByCategory(sidebarItems);
             }
           },
         },
