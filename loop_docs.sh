@@ -22,7 +22,7 @@ $SED_INPLACE 's/"version":.*/"version":"1.20-dev"/' static/latest-swagger.json
 for file in `find ./docs/ -name "*.md"`; do
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
-    $SED_INPLACE 's/{{< version >}}/1.19.3/g' $file
+    $SED_INPLACE 's/{{< version >}}/main-nightly/g' $file
     $SED_INPLACE 's/{{< relref "doc/\/docs/g' $file
     $SED_INPLACE 's/" >}}//g' $file
     $SED_INPLACE 's/\*\*Table of Contents\*\*//' $file
