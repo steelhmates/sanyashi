@@ -85,7 +85,7 @@ const config = {
     ({
       colorMode: {
         defaultMode: 'light',
-        disableSwitch: true,
+        disableSwitch: false,
         respectPrefersColorScheme: true,
       },
       announcementBar: {
@@ -113,10 +113,10 @@ const config = {
             type: 'search',
             position: 'right',
           },
-          {
+         /* {
             type: 'localeDropdown',
             position: 'right',
-          },
+          },*/
           {
             type: 'docsVersionDropdown',
             position: 'right',
