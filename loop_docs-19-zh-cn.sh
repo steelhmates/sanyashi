@@ -8,14 +8,8 @@ else
     SED_INPLACE="sed -i ''"
 fi
 
-$SED_INPLACE 's/</<&#8288;/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/installation/with-docker.zh-cn.md
-$SED_INPLACE 's/<empty/<&#8288;empty/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/installation/with-docker.zh-cn.md
-
-$SED_INPLACE 's/</<&#8288;/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/contributing/guidelines-backend.zh-cn.md
-$SED_INPLACE 's/</&#8288;/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/contributing/guidelines-backend.zh-cn.md
-$SED_INPLACE 's/<empty/<&#8288;empty/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/contributing/guidelines-backend.zh-cn.md
-
-$SED_INPLACE 's/<empty/<&#8288;empty/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/administration/config-cheat-sheet.zh-cn.md
+$SED_INPLACE 's/\\<empty>/<empty\\>/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/installation/with-docker.zh-cn.md
+$SED_INPLACE 's/\\<empty\\>/<empty\\>/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/administration/config-cheat-sheet.zh-cn.md
 
 $SED_INPLACE 's/^url:.*//' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/intro.md
 $SED_INPLACE 's/^slug:.*/slug: \//' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/intro.md

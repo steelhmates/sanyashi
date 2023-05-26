@@ -1,0 +1,32 @@
+name: checks
+
+on:
+  - pull_request
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: https://github.com/actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: install necessary tools
+        run: |
+          apt update -y && apt install -y rsync python python3-pip
+          pip install awscli
+      - name: prepare nightly docs
+        run: |
+          make prepare-latest
+          make prepare-latest-zh-cn
+      - name: prepare 1.19 docs
+        run: |
+          make prepare\#19
+          make prepare-zh-cn\#19
+      - name: cleanup before build
+        run: |
+          rm static/_*
+      - name: build site
+        run: |
+          npm ci
+          npm run build
