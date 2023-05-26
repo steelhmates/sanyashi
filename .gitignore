@@ -26,3 +26,5 @@ static/_headers
 static/_redirects
 static/latest-swagger.json
 static/19-swagger.json
+i18n/zh-cn/docusaurus-plugin-content-docs/current
+i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19

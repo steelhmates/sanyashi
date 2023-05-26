@@ -13,7 +13,6 @@ $SED_INPLACE 's/<empty/<&#8288;empty/' docs/contributing/guidelines-backend.en-u
 $SED_INPLACE 's/</<&#8288;/' docs/contributing/guidelines-backend.en-us.md
 $SED_INPLACE 's/</&#8288;/' docs/contributing/guidelines-backend.en-us.md
 $SED_INPLACE 's/^url:.*//' docs/intro.md
-$SED_INPLACE 's/^title:.*/displayed_sidebar: defaultSidebar/' docs/intro.md
 $SED_INPLACE 's/^slug:.*/slug: \//' docs/intro.md
 $SED_INPLACE 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' docs/development/hacking-on-gitea.en-us.md
 
@@ -23,7 +22,7 @@ for file in `find ./docs/ -name "*.md"`; do
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
     $SED_INPLACE 's/{{< version >}}/main-nightly/g' $file
-    $SED_INPLACE 's/{{< relref "doc/\/docs/g' $file
+    $SED_INPLACE 's/{{< relref "doc/i18n\/en\/docusaurus-plugin-content-docs\/current/g' $file
     $SED_INPLACE 's/" >}}//g' $file
     $SED_INPLACE 's/\*\*Table of Contents\*\*//' $file
     $SED_INPLACE 's/weight:/sidebar_position:/g' $file
@@ -38,4 +37,8 @@ for file in docs/*; do
         continue
     fi
     rm $file || true
+done
+
+for file in `find ./docs/ -name "*.en-us.md"`; do
+    mv "${file}" "${file/.en-us/}"
 done

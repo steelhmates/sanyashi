@@ -10,7 +10,6 @@ fi
 
 $SED_INPLACE 's/<empty/<&#8288;empty/' versioned_docs/version-1.19/administration/config-cheat-sheet.en-us.md
 $SED_INPLACE 's/^url:.*//' versioned_docs/version-1.19/intro.md
-$SED_INPLACE 's/^title:.*/displayed_sidebar: defaultSidebar/' versioned_docs/version-1.19/intro.md
 $SED_INPLACE 's/^slug:.*/slug: \//' versioned_docs/version-1.19/intro.md
 $SED_INPLACE 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' versioned_docs/version-1.19/development/hacking-on-gitea.en-us.md
 
@@ -20,7 +19,7 @@ for file in `find ./versioned_docs/version-1.19/ -name "*.md"`; do
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
     $SED_INPLACE 's/{{< version >}}/1.19.3/g' $file
-    $SED_INPLACE 's/{{< relref "doc/\/docs/g' $file
+    $SED_INPLACE 's/{{< relref "doc/versioned_docs\/version-1.19/g' $file
     $SED_INPLACE 's/" >}}//g' $file
     $SED_INPLACE 's/\*\*Table of Contents\*\*//' $file
     $SED_INPLACE 's/weight:/sidebar_position:/g' $file
@@ -37,4 +36,8 @@ for file in versioned_docs/version-1.19/*; do
         continue
     fi
     rm $file
+done
+
+for file in `find ./versioned_docs/version-1.19/ -name "*.en-us.md"`; do
+    mv "${file}" "${file/.en-us/}"
 done

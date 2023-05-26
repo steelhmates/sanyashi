@@ -25,7 +25,16 @@ const config = {
 
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'/*, 'zh-cn', 'fr-fr', 'zh-tw'*/], // temporarily disable other locales
+    locales: ['en', 'zh-cn'/*, 'fr-fr', 'zh-tw'*/], // temporarily disable other locales
+    localeConfigs: {
+      'en': {
+        label: 'English',
+        htmlLang: 'en-US',
+      },
+      'zh-cn': {
+        label: '中文',
+      },
+    },
   },
 
   presets: [
@@ -71,7 +80,7 @@ const config = {
       "@easyops-cn/docusaurus-search-local",
       {
         hashed: false,
-        language: ["en"],
+        language: ["en", "zh"],
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
         indexBlog: false,
@@ -113,10 +122,10 @@ const config = {
             type: 'search',
             position: 'right',
           },
-         /* {
+         {
             type: 'localeDropdown',
             position: 'right',
-          },*/
+          },
           {
             type: 'docsVersionDropdown',
             position: 'right',
