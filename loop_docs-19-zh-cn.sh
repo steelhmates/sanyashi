@@ -22,7 +22,8 @@ for file in `find ./i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/ -nam
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
     $SED_INPLACE 's/{{< version >}}/1.19.0/g' $file
-    $SED_INPLACE 's/{{< relref "doc/i18n\/zh-cn\/docusaurus-plugin-content-docs\/version-1.19/g' $file
+    $SED_INPLACE 's/{{< relref "doc\///g' $file
+    $SED_INPLACE 's/.zh-cn.md/.md/g' $file
     $SED_INPLACE 's/" >}}//g' $file
     $SED_INPLACE 's/\*\*Table of Contents\*\*//' $file
     $SED_INPLACE 's/weight:/sidebar_position:/g' $file

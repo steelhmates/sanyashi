@@ -19,7 +19,8 @@ for file in `find ./docs/ -name "*.md"`; do
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
     $SED_INPLACE 's/{{< version >}}/main-nightly/g' $file
-    $SED_INPLACE 's/{{< relref "doc/i18n\/en\/docusaurus-plugin-content-docs\/current/g' $file
+    $SED_INPLACE 's/{{< relref "doc\///g' $file
+    $SED_INPLACE 's/.en-us.md/.md/g' $file
     $SED_INPLACE 's/" >}}//g' $file
     $SED_INPLACE 's/\*\*Table of Contents\*\*//' $file
     $SED_INPLACE 's/weight:/sidebar_position:/g' $file
