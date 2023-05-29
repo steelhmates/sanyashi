@@ -1,10 +1,8 @@
 {
-  "sidebar.defaultSidebar.category.actions": {
-    "message": "Actions",
-    "description": "The label for category actions in sidebar defaultSidebar"
+  "sidebar.docs.category.actions": {
+    "message": "Actions"
   },
-  "sidebar.defaultSidebar.category.packages": {
-    "message": "Packages",
-    "description": "The label for category packages in sidebar defaultSidebar"
+  "sidebar.docs.category.packages": {
+    "message": "Packages"
   }
 }
