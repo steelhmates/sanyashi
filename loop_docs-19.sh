@@ -8,7 +8,8 @@ else
     SED_INPLACE="sed -i ''"
 fi
 
-$SED_INPLACE 's/\\<empty>/<empty\\>/' versioned_docs/version-1.19/administration/config-cheat-sheet.en-us.md
+$SED_INPLACE 's/\\<empty/<empty/' versioned_docs/version-1.19/administration/config-cheat-sheet.en-us.md
+$SED_INPLACE 's/<empty>/<empty\\>/' versioned_docs/version-1.19/administration/config-cheat-sheet.en-us.md
 $SED_INPLACE 's/^url:.*//' versioned_docs/version-1.19/intro.md
 $SED_INPLACE 's/^slug:.*/slug: \//' versioned_docs/version-1.19/intro.md
 $SED_INPLACE 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' versioned_docs/version-1.19/development/hacking-on-gitea.en-us.md
