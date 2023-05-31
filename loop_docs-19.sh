@@ -13,6 +13,11 @@ $SED_INPLACE 's/<empty>/<empty\\>/' versioned_docs/version-1.19/administration/c
 $SED_INPLACE 's/^url:.*//' versioned_docs/version-1.19/intro.md
 $SED_INPLACE 's/^slug:.*/slug: \//' versioned_docs/version-1.19/intro.md
 $SED_INPLACE 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' versioned_docs/version-1.19/development/hacking-on-gitea.en-us.md
+$SED_INPLACE 's/{{< min-node-version >}}/16/' versioned_docs/version-1.19/development/hacking-on-gitea.en-us.md
+$SED_INPLACE 's/{{< min-go-version >}}/1.19/' versioned_docs/version-1.19/development/hacking-on-gitea.en-us.md
+$SED_INPLACE 's/{{< go-version >}}/1.20/' versioned_docs/version-1.19/development/hacking-on-gitea.en-us.md
+$SED_INPLACE 's/{{< min-node-version >}}/16/' versioned_docs/version-1.19/installation/from-source.en-us.md
+$SED_INPLACE 's/{{< min-go-version >}}/1.19/' versioned_docs/version-1.19/installation/from-source.en-us.md
 
 $SED_INPLACE 's/"version":.*/"version":"1.19.3"/' static/19-swagger.json
 

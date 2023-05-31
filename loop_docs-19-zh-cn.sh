@@ -14,6 +14,11 @@ $SED_INPLACE 's/\\<empty\\>/<empty\\>/' i18n/zh-cn/docusaurus-plugin-content-doc
 $SED_INPLACE 's/^url:.*//' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/intro.md
 $SED_INPLACE 's/^slug:.*/slug: \//' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/intro.md
 $SED_INPLACE 's/.\/guidelines-frontend.md/.\/guidelines-frontend/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/development/hacking-on-gitea.zh-cn.md
+$SED_INPLACE 's/{{< min-node-version >}}/16/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/development/hacking-on-gitea.zh-cn.md
+$SED_INPLACE 's/{{< min-go-version >}}/1.19/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/development/hacking-on-gitea.zh-cn.md
+$SED_INPLACE 's/{{< go-version >}}/1.20/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/development/hacking-on-gitea.zh-cn.md
+$SED_INPLACE 's/{{< min-node-version >}}/16/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/installation/from-source.zh-cn.md
+$SED_INPLACE 's/{{< min-go-version >}}/1.19/' i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/installation/from-source.zh-cn.md
 
 $SED_INPLACE 's/"version":.*/"version":"1.19.0"/' static/19-swagger.json
 
