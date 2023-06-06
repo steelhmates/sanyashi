@@ -24,6 +24,7 @@ $SED_INPLACE 's/"version":.*/"version":"1.20-dev"/' static/latest-swagger.json
 for file in `find ./docs/ -name "*.md"`; do
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
+    $SED_INPLACE 's/dl.gitea.com\/gitea\/{{< version >}}/dl.gitea.com\/gitea\/main/g' $file
     $SED_INPLACE 's/{{< version >}}/main-nightly/g' $file
     $SED_INPLACE 's/{{< relref "doc\///g' $file
     $SED_INPLACE 's/.en-us.md/.md/g' $file

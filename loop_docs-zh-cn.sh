@@ -26,7 +26,8 @@ for file in `find ./i18n/zh-cn/docusaurus-plugin-content-docs/current/ -name "*.
     # note only works on linux, forget about it when attempting to run on macos
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
-    $SED_INPLACE 's/{{< version >}}/1.18.2/g' $file
+    $SED_INPLACE 's/dl.gitea.com\/gitea\/{{< version >}}/dl.gitea.com\/gitea\/main/g' $file
+    $SED_INPLACE 's/{{< version >}}/main-nightly/g' $file
     $SED_INPLACE 's/{{< relref "doc\///g' $file
     $SED_INPLACE 's/.zh-cn.md/.md/g' $file
     $SED_INPLACE 's/" >}}//g' $file
