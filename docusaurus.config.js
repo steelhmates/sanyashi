@@ -24,12 +24,11 @@ const config = {
   favicon: 'img/favicon.png',
 
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'zh-cn'/*, 'fr-fr', 'zh-tw'*/], // temporarily disable other locales
+    defaultLocale: 'en-us',
+    locales: ['en-us', 'zh-cn'/*, 'fr-fr', 'zh-tw'*/], // temporarily disable other locales
     localeConfigs: {
-      'en': {
+      'en-us': {
         label: 'English',
-        htmlLang: 'en-US',
       },
       'zh-cn': {
         label: '中文',
@@ -47,15 +46,12 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/', // Serve the docs at the site's root
           editUrl: ({versionDocsDirPath, docPath, locale, version, permalink}) => {
-            let fileName = `doc/${docPath.replace('.md', '')}.en-us.md`;
-            if (locale === 'zh-cn') {
-              fileName = `doc/${docPath.replace('.md', '')}.zh-cn.md`;
-            }
+            let fileName = `doc/${docPath.replace('.md', '')}.${locale}.md`;
             // intro.md has different name from upstream, need to handle this here
             if (docPath.includes('intro.md')) {
-              fileName = locale === 'zh-cn' ? 'page/index.zh-cn.md': 'page/index.en-us.md';
+              fileName = `page/index.${locale}.md`;
             }
-            return `https://github.com/go-gitea/gitea/tree/main/docs/content/${fileName}`;
+            return `https://github.com/go-gitea/gitea/tree/${version === 'current' ? 'main': `release/v${version}`}/docs/content/${fileName}`;
           },
           versions: {
             current: {

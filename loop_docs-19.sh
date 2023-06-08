@@ -21,7 +21,7 @@ $SED_INPLACE 's/{{< min-go-version >}}/1.19/' versioned_docs/version-1.19/instal
 
 $SED_INPLACE 's/"version":.*/"version":"1.19.3"/' static/19-swagger.json
 
-for file in `find ./versioned_docs/version-1.19/ -name "*.md"`; do
+for file in `find ./versioned_docs/version-1.19 -name "*.md"`; do
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
     $SED_INPLACE 's/{{< version >}}/1.19.3/g' $file
@@ -44,7 +44,8 @@ for file in versioned_docs/version-1.19/*; do
     fi
     rm $file
 done
-
-for file in `find ./versioned_docs/version-1.19/ -name "*.en-us.md"`; do
+# file names under ./versioned_docs/version-1.19 and i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19/ should be the same for docusaurus 
+# to recognize them as tanslated.
+for file in `find ./versioned_docs/version-1.19 -name "*.en-us.md"`; do
     mv "${file}" "${file/.en-us/}"
 done

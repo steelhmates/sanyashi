@@ -21,7 +21,7 @@ $SED_INPLACE 's/{{< min-go-version >}}/1.20/' docs/installation/from-source.en-u
 
 $SED_INPLACE 's/"version":.*/"version":"1.20-dev"/' static/latest-swagger.json
 
-for file in `find ./docs/ -name "*.md"`; do
+for file in `find ./docs -name "*.md"`; do
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
     $SED_INPLACE 's/dl.gitea.com\/gitea\/{{< version >}}/dl.gitea.com\/gitea\/main/g' $file
@@ -44,6 +44,8 @@ for file in docs/*; do
     rm $file || true
 done
 
-for file in `find ./docs/ -name "*.en-us.md"`; do
+# file names under docs/ and i18n/zh-cn/docusaurus-plugin-content-docs/current/ should be the same for docusaurus 
+# to recognize them as tanslated.
+for file in `find ./docs -name "*.en-us.md"`; do
     mv "${file}" "${file/.en-us/}"
 done

@@ -13,10 +13,11 @@ create_dir:
 
 .PHONY: clone_main
 clone_main: create_dir
-	git clone --depth=1 --branch=main https://github.com/go-gitea/gitea.git .tmp/upstream-docs-latest
+	git clone --branch=main https://github.com/go-gitea/gitea.git .tmp/upstream-docs-latest
 	cur_path=`pwd`
 	cd .tmp/upstream-docs-latest/docs && make trans-copy
 	cd $(cur_path)
+	bash check_outdated.sh latest zh-cn
 
 .PHONY: prepare-latest
 prepare-latest: clone_main
@@ -37,10 +38,11 @@ prepare-latest-zh-cn:
 
 .PHONY: clone_\#%
 clone_\#%: create_dir
-	git clone --depth=1 --branch=release/v1.$* https://github.com/go-gitea/gitea.git .tmp/upstream-docs-$*
+	git clone --branch=release/v1.$* https://github.com/go-gitea/gitea.git .tmp/upstream-docs-$*
 	cur_path=`pwd`
 	cd .tmp/upstream-docs-$*/docs && make trans-copy
 	cd $(cur_path)
+	bash check_outdated.sh $* zh-cn
 
 .PHONY: prepare\#%
 prepare\#%: clone_\#%

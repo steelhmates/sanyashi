@@ -22,7 +22,7 @@ $SED_INPLACE 's/{{< min-go-version >}}/1.20/' i18n/zh-cn/docusaurus-plugin-conte
 
 $SED_INPLACE 's/"version":.*/"version":"1.20-dev"/' static/latest-swagger.json
 
-for file in `find ./i18n/zh-cn/docusaurus-plugin-content-docs/current/ -name "*.md"`; do
+for file in `find ./i18n/zh-cn/docusaurus-plugin-content-docs/current -name "*.md"`; do
     # note only works on linux, forget about it when attempting to run on macos
     # hide hugo toc
     $SED_INPLACE 's/{{< toc >}}//' $file
@@ -45,7 +45,7 @@ for file in i18n/zh-cn/docusaurus-plugin-content-docs/current/*; do
     rm $file
 done
 
-for file in `find ./i18n/zh-cn/docusaurus-plugin-content-docs/current/ -name "*.zh-cn.md"`; do
+for file in `find ./i18n/zh-cn/docusaurus-plugin-content-docs/current -name "*.zh-cn.md"`; do
     mv "${file}" "${file/.zh-cn/}"
 done
 
