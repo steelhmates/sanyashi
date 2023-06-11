@@ -17,7 +17,8 @@ clone_main: create_dir
 	cur_path=`pwd`
 	cd .tmp/upstream-docs-latest
 	git config core.sparsecheckout true
-	echo "docs/*" > .git/info/sparse-checkout
+	echo "docs/*" >> .git/info/sparse-checkout
+	echo "Makefile" >> .git/info/sparse-checkout
 	git checkout
 	cd docs && make trans-copy
 	cd $(cur_path)
@@ -45,7 +46,8 @@ clone_\#%: create_dir
 	git clone --filter=blob:none --no-checkout --branch=release/v1.$* https://github.com/go-gitea/gitea.git .tmp/upstream-docs-$*
 	cur_path=`pwd`
 	cd .tmp/upstream-docs-$* && git config core.sparsecheckout true
-	echo "docs/*" > .git/info/sparse-checkout
+	echo "docs/*" >> .git/info/sparse-checkout
+	echo "Makefile" >> .git/info/sparse-checkout
 	git checkout release/v1.$*
 	cd docs && make trans-copy
 	cd $(cur_path)
