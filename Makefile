@@ -13,9 +13,13 @@ create_dir:
 
 .PHONY: clone_main
 clone_main: create_dir
-	git clone --branch=main https://github.com/go-gitea/gitea.git .tmp/upstream-docs-latest
+	git clone --filter=blob:none --no-checkout https://github.com/go-gitea/gitea.git .tmp/upstream-docs-latest
 	cur_path=`pwd`
-	cd .tmp/upstream-docs-latest/docs && make trans-copy
+	cd .tmp/upstream-docs-latest
+	git config core.sparsecheckout true
+	echo "docs/*" > .git/info/sparse-checkout
+	git pull origin main
+	cd docs && make trans-copy
 	cd $(cur_path)
 	bash check_outdated.sh latest zh-cn
 
@@ -28,7 +32,7 @@ prepare-latest: clone_main
 	bash loop_docs.sh
 
 .PHONY: prepare-latest-zh-cn
-prepare-latest-zh-cn: 
+prepare-latest-zh-cn:
 	# clone_main
 	# cp -r .tmp/upstream-docs-latest/docs/static/* static/
 	mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/current
@@ -38,9 +42,12 @@ prepare-latest-zh-cn:
 
 .PHONY: clone_\#%
 clone_\#%: create_dir
-	git clone --branch=release/v1.$* https://github.com/go-gitea/gitea.git .tmp/upstream-docs-$*
+	git clone --filter=blob:none --no-checkout --branch=release/v1.$* https://github.com/go-gitea/gitea.git .tmp/upstream-docs-$*
 	cur_path=`pwd`
-	cd .tmp/upstream-docs-$*/docs && make trans-copy
+	cd .tmp/upstream-docs-$* && git config core.sparsecheckout true
+	echo "docs/*" > .git/info/sparse-checkout
+	git pull origin release/v1.$*
+	cd docs && make trans-copy
 	cd $(cur_path)
 	bash check_outdated.sh $* zh-cn
 
@@ -54,7 +61,7 @@ prepare\#%: clone_\#%
 	rm versioned_docs/version-1.$*/help/search.md || true
 
 .PHONY: prepare-zh-cn\#%
-prepare-zh-cn\#%: 
+prepare-zh-cn\#%:
 	# clone_\#%
 	# cp -r .tmp/upstream-docs-$*/docs/static/* static/
 	mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*
