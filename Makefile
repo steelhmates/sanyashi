@@ -18,7 +18,7 @@ clone_main: create_dir
 	cd .tmp/upstream-docs-latest
 	git config core.sparsecheckout true
 	echo "docs/*" > .git/info/sparse-checkout
-	git pull origin main
+	git checkout
 	cd docs && make trans-copy
 	cd $(cur_path)
 	bash check_outdated.sh latest zh-cn
@@ -46,7 +46,7 @@ clone_\#%: create_dir
 	cur_path=`pwd`
 	cd .tmp/upstream-docs-$* && git config core.sparsecheckout true
 	echo "docs/*" > .git/info/sparse-checkout
-	git pull origin release/v1.$*
+	git checkout release/v1.$*
 	cd docs && make trans-copy
 	cd $(cur_path)
 	bash check_outdated.sh $* zh-cn
