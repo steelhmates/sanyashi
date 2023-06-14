@@ -25,7 +25,7 @@ prepare-latest: clone_main
 	rsync -avz --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ docs/
 	cp .tmp/upstream-docs-latest/docs/content/page/index.en-us.md docs/intro.md
 	cp .tmp/upstream-docs-latest/templates/swagger/v1_json.tmpl static/latest-swagger.json
-	bash loop_docs.sh
+	bash loop_docs.sh lastest en-us
 
 .PHONY: prepare-latest-zh-cn
 prepare-latest-zh-cn: 
@@ -34,7 +34,7 @@ prepare-latest-zh-cn:
 	mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/current
 	rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ i18n/zh-cn/docusaurus-plugin-content-docs/current/
 	cp .tmp/upstream-docs-latest/docs/content/page/index.zh-cn.md i18n/zh-cn/docusaurus-plugin-content-docs/current/intro.md
-	bash loop_docs-zh-cn.sh
+	bash loop_docs.sh lastest zh-cn
 
 .PHONY: clone_\#%
 clone_\#%: create_dir
@@ -50,8 +50,7 @@ prepare\#%: clone_\#%
 	rsync -a --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-$*/docs/content/doc/ versioned_docs/version-1.$*/
 	cp .tmp/upstream-docs-$*/docs/content/page/index.en-us.md versioned_docs/version-1.$*/intro.md
 	cp .tmp/upstream-docs-$*/templates/swagger/v1_json.tmpl static/$*-swagger.json
-	bash loop_docs-$*.sh
-	rm versioned_docs/version-1.$*/help/search.md || true
+	bash loop_docs.sh $* en-us
 
 .PHONY: prepare-zh-cn\#%
 prepare-zh-cn\#%: 
@@ -59,9 +58,8 @@ prepare-zh-cn\#%:
 	# cp -r .tmp/upstream-docs-$*/docs/static/* static/
 	mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*
 	rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs-$*/docs/content/doc/ i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*/
-	cp .tmp/upstream-docs-19/docs/content/page/index.zh-cn.md i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*/intro.md
-	bash loop_docs-$*-zh-cn.sh
-	rm i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*/help/search.md || true
+	cp .tmp/upstream-docs-$*/docs/content/page/index.zh-cn.md i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*/intro.md
+	bash loop_docs.sh $* zh-cn
 
 .PHONY: install
 install:
@@ -84,3 +82,4 @@ clean:
 	rm -rf static/_*
 	rm -rf static/latest-swagger.json
 	rm -rf static/19-swagger.json
+	rm -rf static/20-swagger.json

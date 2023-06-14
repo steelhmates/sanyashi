@@ -55,12 +55,18 @@ const config = {
           },
           versions: {
             current: {
-              label: '1.20-dev', // path is kept as next for dev (so users can always find "nightly" docs)
+              label: 'next', // path is kept as next for dev (so users can always find "nightly" docs)
+              banner: 'unreleased',
             },
-            1.19 : {
-              label: '1.19.3'
+            '1.20': {
+              label: '1.20.0-rc0',
+              banner: 'none',
+            },
+            '1.19': {
+              label: '1.19.3',
             }
           },
+          lastVersion: '1.19',
           async sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
             const {item} = args;
             // Use the provided data to generate a custom sidebar slice
