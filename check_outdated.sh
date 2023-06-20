@@ -9,11 +9,14 @@
 
 set -xe
 
-if sed --version 2>/dev/null | grep -q GNU; then
-    SED_INPLACE="sed -i"
-else
-    SED_INPLACE="sed -i ''"
-fi
+SED_INPLACE() {
+  if sed --version 2>/dev/null | grep -q GNU; then
+    sed -i "$@"
+  else
+    sed -i '' "$@"
+  fi
+}
+
 version="$1"
 locale="$2"
 cur_path=`pwd`
@@ -31,7 +34,7 @@ for file in `find ./docs/content/doc -name "*.${locale}.md"`; do
     fi
     if [[ "$latest_commit_time_en" -gt "$latest_commit_time_locale" ]]; then
         echo "file: $file, lastest commit timestamp: $latest_commit_time_en (en ver), $latest_commit_time_locale ($locale ver)"
-        $SED_INPLACE '1s/---/---\nisOutdated: true/' $file
+        SED_INPLACE '1s/---/---\nisOutdated: true/' $file
     fi
 done
 
