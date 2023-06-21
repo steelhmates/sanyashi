@@ -55,7 +55,7 @@ const config = {
           },
           versions: {
             current: {
-              label: 'next', // path is kept as next for dev (so users can always find "nightly" docs)
+              label: '1.21-dev', // path is kept as next for dev (so users can always find "nightly" docs)
               banner: 'unreleased',
             },
             '1.20': {
