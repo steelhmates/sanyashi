@@ -59,7 +59,7 @@ const config = {
               banner: 'unreleased',
             },
             '1.20': {
-              label: '1.20.0-rc0',
+              label: '1.20.0-rc1',
               banner: 'none',
             },
             '1.19': {
