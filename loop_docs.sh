@@ -69,8 +69,8 @@ fi
 for file in `find ./"$docs_dir" -name "*.md"`; do
     # hide hugo toc
     SED_INPLACE 's/{{< toc >}}//' $file
-    SED_INPLACE 's/dl.gitea.com\/gitea\/{{< version >}}/dl.gitea.com\/gitea\/main/g' $file
     if [ "$version" == "lastest" ]; then
+      SED_INPLACE 's/dl.gitea.com\/gitea\/{{< version >}}/dl.gitea.com\/gitea\/main/g' $file
       SED_INPLACE 's/gitea\/gitea\:{{< version >}}/gitea\/gitea\:nightly/g' $file
     fi
     SED_INPLACE "s/{{< version >}}/$version/g" $file
