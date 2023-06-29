@@ -73,7 +73,7 @@ for file in `find ./"$docs_dir" -name "*.md"`; do
     if [ "$version" == "lastest" ]; then
       SED_INPLACE 's/gitea\/gitea\:{{< version >}}/gitea\/gitea\:nightly/g' $file
     fi
-    SED_INPLACE "s/{{< version >}}/$minorVer/g" $file
+    SED_INPLACE "s/{{< version >}}/$version/g" $file
     SED_INPLACE 's/{{< relref "doc\///g' $file
     SED_INPLACE "s/.$locale.md/.md/g" $file
     SED_INPLACE 's/" >}}//g' $file
