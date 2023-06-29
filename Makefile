@@ -9,7 +9,19 @@ all: build
 
 .PHONY: create_dir
 create_dir:
-	mkdir -p .tmp docs versioned_docs
+	mkdir -p .tmp docs versioned_docs awesome
+
+.PHONY: clone_awesome
+clone_awesome: create_dir
+	git clone --branch=main https://gitea.com/gitea/awesome-gitea.git .tmp/upstream-awesome || true
+
+.PHONY: prepare-awesome-latest
+prepare-awesome-latest: clone_awesome
+	cp .tmp/upstream-awesome/README.md docs/awesome.md
+
+.PHONY: prepare-awesome\#%
+prepare-awesome\#%:
+	cp .tmp/upstream-awesome/README.md  versioned_docs/version-1.$*/awesome.md
 
 .PHONY: clone_main
 clone_main: create_dir
@@ -28,7 +40,7 @@ prepare-latest: clone_main
 	bash loop_docs.sh lastest en-us
 
 .PHONY: prepare-latest-zh-cn
-prepare-latest-zh-cn: 
+prepare-latest-zh-cn:
 	# clone_main
 	# cp -r .tmp/upstream-docs-latest/docs/static/* static/
 	mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/current
@@ -53,7 +65,7 @@ prepare\#%: clone_\#%
 	bash loop_docs.sh $* en-us
 
 .PHONY: prepare-zh-cn\#%
-prepare-zh-cn\#%: 
+prepare-zh-cn\#%:
 	# clone_\#%
 	# cp -r .tmp/upstream-docs-$*/docs/static/* static/
 	mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*
@@ -66,12 +78,12 @@ install:
 	npm install
 
 .PHONY: build
-build: install prepare-latest prepare\#19 prepare-latest-zh-cn prepare-zh-cn\#19
+build: install prepare-latest prepare\#19 prepare\#20 prepare-latest-zh-cn prepare-zh-cn\#19 prepare-zh-cn\#20 prepare-awesome-latest prepare-awesome\#19 prepare-awesome\#20
 	npm ci
 	npm run build
 
 .PHONY: serve
-serve: install prepare-latest prepare\#19 prepare-latest-zh-cn prepare-zh-cn\#19
+serve: install prepare-latest prepare\#19 prepare\#20 prepare-latest-zh-cn prepare-zh-cn\#19 prepare-zh-cn\#20 prepare-awesome-latest prepare-awesome\#19 prepare-awesome\#20
 	npm run start
 
 .PHONY: clean
