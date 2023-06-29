@@ -61,7 +61,7 @@ SED_INPLACE "s/{{< min-go-version >}}/$minGoVer/" "$docs_dir/installation/from-s
 if [ "$version" == "lastest" ]; then
     SED_INPLACE 's/"version":.*/"version":"1.21-dev"/' static/latest-swagger.json
 elif [ "$version" == "1.20" ]; then
-    SED_INPLACE 's/"version":.*/"version":"1.20.0-rc0"/' static/20-swagger.json
+    SED_INPLACE 's/"version":.*/"version":"1.20.0-rc2"/' static/20-swagger.json
 elif [ "$version" == "1.19" ]; then
     SED_INPLACE 's/"version":.*/"version":"1.19.3"/' static/19-swagger.json
 fi
