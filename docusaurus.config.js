@@ -97,7 +97,7 @@ const config = {
               banner: 'none',
             },
             '1.19': {
-              label: '1.19.3',
+              label: '1.19.4',
             }
           },
           lastVersion: '1.19',
@@ -173,7 +173,7 @@ const config = {
             items: [
               {to: '/api/next/', label: '1.21-dev' },
               {to: '/api/1.20/', label: '1.20.0-rc0' },
-              {to: '/api/1.19/', label: '1.19.3' },
+              {to: '/api/1.19/', label: '1.19.4' },
             ],
             className: 'api-dropdown',
           },
