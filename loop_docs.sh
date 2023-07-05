@@ -15,7 +15,7 @@ SED_INPLACE() {
 }
 
 version="$1"
-if [ "$version" != "lastest" ]; then
+if [ "$version" != "latest" ]; then
     version="1.$1"
 fi
 locale="$2"
@@ -31,7 +31,7 @@ elif ["$version" == "1.20"]; then
 fi
 
 docs_dir="versioned_docs/version-$version"
-if [ "$version" == "lastest" ]; then
+if [ "$version" == "latest" ]; then
     if [ "$locale" == "en-us" ]; then
         docs_dir="docs"
     else
@@ -58,13 +58,14 @@ SED_INPLACE "s/{{< min-go-version >}}/$minGoVer/" "$docs_dir/installation/from-s
 
 # TODO: improve this sed
 # need confirmation
-if [ "$version" == "lastest" ]; then
-    SED_INPLACE 's/"version":.*/"version":"1.21-dev"/' static/latest-swagger.json
+if [ "$version" == "latest" ]; then
+    SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.21-dev"/' static/swagger-latest.json
 elif [ "$version" == "1.20" ]; then
-    SED_INPLACE 's/"version":.*/"version":"1.20.0-rc2"/' static/20-swagger.json
+    SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.20.0-rc2"/' static/swagger-20.json
 elif [ "$version" == "1.19" ]; then
-    SED_INPLACE 's/"version":.*/"version":"1.19.3"/' static/19-swagger.json
+    SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.19.3"/' static/swagger-19.json
 fi
+SED_INPLACE 's/"basePath": "{{AppSubUrl | JSEscape | Safe}}/"basePath": "https:\/\/gitea.com/' static/swagger-"$1".json
 
 for file in `find ./"$docs_dir" -name "*.md"`; do
     # hide hugo toc

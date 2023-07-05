@@ -13,6 +13,40 @@ function sortItemsByCategory(items) {
   return sortedItems;
 }
 
+const includeAPI = process.env.INCLUDE_API !== 'false';
+
+const apiConfig = [
+  'redocusaurus',
+  {
+    // Plugin Options for loading OpenAPI files
+    specs: includeAPI ? [
+      {
+        spec: 'static/swagger-latest.json',
+        route: '/api/next/',
+      },
+      {
+        route: '/api/1.20/',
+        spec: 'static/swagger-20.json',
+      },
+      {
+        route: '/api/1.19/',
+        spec: 'static/swagger-19.json',
+      },
+    ]: [],
+    // Theme Options for modifying how redoc renders them
+    theme: {
+      // Change with your site colors
+      primaryColor: '#1890ff',
+    },
+  },
+]
+
+const pageConfig = includeAPI ? {
+  exclude: [
+    'api/**',
+  ],
+}: {}
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Gitea Documentation',
@@ -82,8 +116,10 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        pages: pageConfig,
       }),
     ],
+    apiConfig,
   ],
   themes: [
     [
@@ -119,9 +155,27 @@ const config = {
         },
         items: [
           {
-            to: '/',
+            type: 'doc',
+            docId: 'intro',
             position: 'left',
             label: 'Docs',
+          },
+          {
+            to: '/api/1.19/',
+            label: 'API',
+            position: 'left',
+            activeBaseRegex: 'api/(1.19|1.20|next)/',
+          },
+          {
+            type: 'dropdown',
+            label: 'API Version',
+            position: 'right',
+            items: [
+              {to: '/api/next/', label: '1.21-dev' },
+              {to: '/api/1.20/', label: '1.20.0-rc0' },
+              {to: '/api/1.19/', label: '1.19.3' },
+            ],
+            className: 'api-dropdown',
           },
           {
             href: 'https://github.com/go-gitea/gitea',

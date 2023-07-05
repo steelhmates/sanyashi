@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Translate from '@docusaurus/Translate';
 
 export default function Outdated(props) {

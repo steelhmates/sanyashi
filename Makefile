@@ -1,8 +1,4 @@
-ifeq ($(shell sed --version 2>/dev/null | grep -q GNU && echo gnu),gnu)
-	SED_INPLACE := sed -i
-else
-	SED_INPLACE := sed -i ''
-endif
+export NODE_OPTIONS := "--max-old-space-size=4096"
 
 .PHONY: all
 all: build
@@ -36,8 +32,8 @@ prepare-latest: clone_main
 	cp -r .tmp/upstream-docs-latest/docs/static/* static/
 	rsync -avz --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ docs/
 	cp .tmp/upstream-docs-latest/docs/content/page/index.en-us.md docs/intro.md
-	cp .tmp/upstream-docs-latest/templates/swagger/v1_json.tmpl static/latest-swagger.json
-	bash loop_docs.sh lastest en-us
+	cp .tmp/upstream-docs-latest/templates/swagger/v1_json.tmpl static/swagger-latest.json
+	bash loop_docs.sh latest en-us
 
 .PHONY: prepare-latest-zh-cn
 prepare-latest-zh-cn:
@@ -46,7 +42,8 @@ prepare-latest-zh-cn:
 	mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/current
 	rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/doc/ i18n/zh-cn/docusaurus-plugin-content-docs/current/
 	cp .tmp/upstream-docs-latest/docs/content/page/index.zh-cn.md i18n/zh-cn/docusaurus-plugin-content-docs/current/intro.md
-	bash loop_docs.sh lastest zh-cn
+	bash loop_docs.sh latest zh-cn
+	rm -rf .tmp/upstream-docs-latest
 
 .PHONY: clone_\#%
 clone_\#%: create_dir
@@ -61,7 +58,7 @@ prepare\#%: clone_\#%
 	cp -r .tmp/upstream-docs-$*/docs/static/* static/
 	rsync -a --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-$*/docs/content/doc/ versioned_docs/version-1.$*/
 	cp .tmp/upstream-docs-$*/docs/content/page/index.en-us.md versioned_docs/version-1.$*/intro.md
-	cp .tmp/upstream-docs-$*/templates/swagger/v1_json.tmpl static/$*-swagger.json
+	cp .tmp/upstream-docs-$*/templates/swagger/v1_json.tmpl static/swagger-$*.json
 	bash loop_docs.sh $* en-us
 
 .PHONY: prepare-zh-cn\#%
@@ -72,18 +69,22 @@ prepare-zh-cn\#%:
 	rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs-$*/docs/content/doc/ i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*/
 	cp .tmp/upstream-docs-$*/docs/content/page/index.zh-cn.md i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*/intro.md
 	bash loop_docs.sh $* zh-cn
+	rm -rf .tmp/upstream-docs-$*
 
 .PHONY: install
 install:
 	npm install
 
+.PHONY: prepare-docs
+prepare-docs: install prepare-latest prepare\#20 prepare\#19 prepare-latest-zh-cn prepare-zh-cn\#20 prepare-zh-cn\#19 prepare-awesome-latest prepare-awesome\#19 prepare-awesome\#20
+
 .PHONY: build
-build: install prepare-latest prepare\#19 prepare\#20 prepare-latest-zh-cn prepare-zh-cn\#19 prepare-zh-cn\#20 prepare-awesome-latest prepare-awesome\#19 prepare-awesome\#20
+build:
 	npm ci
 	npm run build
 
 .PHONY: serve
-serve: install prepare-latest prepare\#19 prepare\#20 prepare-latest-zh-cn prepare-zh-cn\#19 prepare-zh-cn\#20 prepare-awesome-latest prepare-awesome\#19 prepare-awesome\#20
+serve: prepare-docs
 	npm run start
 
 .PHONY: clean
@@ -92,6 +93,6 @@ clean:
 	rm -rf docs
 	rm -rf versioned_docs/
 	rm -rf static/_*
-	rm -rf static/latest-swagger.json
-	rm -rf static/19-swagger.json
-	rm -rf static/20-swagger.json
+	rm -rf static/swagger-latest.json
+	rm -rf static/swagger-19.json
+	rm -rf static/swagger-20.json

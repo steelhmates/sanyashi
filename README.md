@@ -4,6 +4,7 @@
 
 ```shell
 make clean
+make prepare-docs
 make build
 ```
 
@@ -11,6 +12,7 @@ make build
 
 ```shell
 make clean
+make prepare-docs
 make serve
 ```
 
@@ -37,4 +39,13 @@ npx docusaurus write-translations --locale zh-cn
 ```
 npm run build
 npm run serve
+```
+
+## Use CSR Api 
+
+This is for development, api pages will be CSR so this saves building time
+
+```
+npm run start-CSRApi
+npm run build-CSRApi
 ```

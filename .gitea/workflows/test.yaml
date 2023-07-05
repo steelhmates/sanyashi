@@ -34,5 +34,4 @@ jobs:
           rm static/_*
       - name: build site
         run: |
-          npm ci
-          npm run build
+          make build

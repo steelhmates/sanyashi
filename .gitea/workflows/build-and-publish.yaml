@@ -38,8 +38,7 @@ jobs:
           rm static/_*
       - name: build site
         run: |
-          npm ci
-          npm run build
+          make build
       - name: aws credential configure
         uses: https://github.com/aws-actions/configure-aws-credentials@v1
         with:

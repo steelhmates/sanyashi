@@ -5,7 +5,9 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
+    "start-CSRApi": "cross-env INCLUDE_API='false' docusaurus start",
     "build": "docusaurus build",
+    "build-CSRApi": "cross-env INCLUDE_API='false' docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -21,10 +23,12 @@
     "clsx": "^1.2.1",
     "prism-react-renderer": "^1.3.5",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "redocusaurus": "^1.6.3"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.3.1"
+    "@docusaurus/module-type-aliases": "^2.3.1",
+    "cross-env": "^7.0.3"
   },
   "browserslist": {
     "production": [
