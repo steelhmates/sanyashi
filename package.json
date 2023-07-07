@@ -5,9 +5,9 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "start-CSRApi": "cross-env INCLUDE_API='false' docusaurus start",
+    "start-CSRApi": "cross-env API_SSR='false' docusaurus start",
     "build": "docusaurus build",
-    "build-CSRApi": "cross-env INCLUDE_API='false' docusaurus build",
+    "build-CSRApi": "cross-env API_SSR='false' docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

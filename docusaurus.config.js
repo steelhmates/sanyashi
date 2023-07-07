@@ -13,13 +13,13 @@ function sortItemsByCategory(items) {
   return sortedItems;
 }
 
-const includeAPI = process.env.INCLUDE_API !== 'false';
+const renderApiSSR = process.env.API_SSR !== 'false';
 
 const apiConfig = [
   'redocusaurus',
   {
     // Plugin Options for loading OpenAPI files
-    specs: includeAPI ? [
+    specs: renderApiSSR ? [
       {
         spec: 'static/swagger-latest.json',
         route: '/api/next/',
@@ -41,7 +41,7 @@ const apiConfig = [
   },
 ]
 
-const pageConfig = includeAPI ? {
+const pageConfig = renderApiSSR ? {
   exclude: [
     'api/**',
   ],
@@ -167,15 +167,14 @@ const config = {
             activeBaseRegex: 'api/(1.19|1.20|next)/',
           },
           {
-            type: 'dropdown',
+            type: 'custom-apiDropdown',
             label: 'API Version',
             position: 'right',
             items: [
               {to: '/api/next/', label: '1.21-dev' },
-              {to: '/api/1.20/', label: '1.20.0-rc0' },
+              {to: '/api/1.20/', label: '1.20.0-rc2' },
               {to: '/api/1.19/', label: '1.19.4' },
             ],
-            className: 'api-dropdown',
           },
           {
             href: 'https://github.com/go-gitea/gitea',
