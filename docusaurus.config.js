@@ -153,6 +153,7 @@ const config = {
           alt: 'Gitea Logo',
           src: 'img/gitea.svg',
           href: 'https://about.gitea.com/',
+          target: '_self',
         },
         items: [
           {
@@ -172,6 +173,7 @@ const config = {
             label: 'Blog',
             href: 'https://blog.gitea.com',
             className: 'internal-href',
+            target: '_self',
           },
           {
             type: 'custom-apiDropdown',
@@ -212,6 +214,7 @@ const config = {
             label: 'Sign In', 
             position: 'right',
             className: 'internal-href signin-button',
+            target: '_self',
           },
         ],
       },
