@@ -152,6 +152,7 @@ const config = {
         logo: {
           alt: 'Gitea Logo',
           src: 'img/gitea.svg',
+          href: 'https://about.gitea.com/',
         },
         items: [
           {
@@ -165,6 +166,12 @@ const config = {
             label: 'API',
             position: 'left',
             activeBaseRegex: 'api/(1.19|1.20|next)/',
+          },
+          {
+            position: 'left',
+            label: 'Blog',
+            href: 'https://blog.gitea.com',
+            className: 'internal-href',
           },
           {
             type: 'custom-apiDropdown',
@@ -199,7 +206,13 @@ const config = {
             position: 'right',
             label: 'Support',
             activeBaseRegex: 'help/seek-help',
-          }
+          },
+          {
+            href: 'https://gitea.com/user/login',
+            label: 'Sign In', 
+            position: 'right',
+            className: 'internal-href signin-button',
+          },
         ],
       },
       footer: {
