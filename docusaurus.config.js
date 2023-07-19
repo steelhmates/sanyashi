@@ -203,10 +203,10 @@ const config = {
             dropdownActiveClassDisabled: true,
           },
           {
-            to: 'help/seek-help',
+            to: 'help/support',
             position: 'right',
             label: 'Support',
-            activeBaseRegex: 'help/seek-help',
+            activeBaseRegex: 'help/support',
           },
           {
             href: 'https://gitea.com/user/login',
