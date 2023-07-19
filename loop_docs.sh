@@ -27,7 +27,7 @@ if [ "$version" == "1.19" ]; then
     minorVer="1.19.4"
     minGoVer="1.19"
 elif [ "$version" == "1.20" ]; then
-    minorVer="1.20.0-rc2"
+    minorVer="1.20.0"
 fi
 
 docs_dir="versioned_docs/version-$version"

@@ -93,14 +93,13 @@ const config = {
               banner: 'unreleased',
             },
             '1.20': {
-              label: '1.20.0-rc2',
-              banner: 'none',
+              label: '1.20.0'
             },
             '1.19': {
               label: '1.19.4',
             }
           },
-          lastVersion: '1.19',
+          lastVersion: '1.20',
           async sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
             const {item} = args;
             // Use the provided data to generate a custom sidebar slice
@@ -163,7 +162,7 @@ const config = {
             label: 'Docs',
           },
           {
-            to: '/api/1.19/',
+            to: '/api/1.20/',
             label: 'API',
             position: 'left',
             activeBaseRegex: 'api/(1.19|1.20|next)/',
@@ -181,7 +180,7 @@ const config = {
             position: 'right',
             items: [
               {to: '/api/next/', label: '1.21-dev' },
-              {to: '/api/1.20/', label: '1.20.0-rc2' },
+              {to: '/api/1.20/', label: '1.20.0' },
               {to: '/api/1.19/', label: '1.19.4' },
             ],
           },
@@ -211,7 +210,7 @@ const config = {
           },
           {
             href: 'https://gitea.com/user/login',
-            label: 'Sign In', 
+            label: 'Sign In',
             position: 'right',
             className: 'internal-href signin-button',
             target: '_self',
