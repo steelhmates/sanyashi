@@ -27,11 +27,7 @@ const apiConfig = [
       {
         route: '/api/1.20/',
         spec: 'static/swagger-20.json',
-      },
-      {
-        route: '/api/1.19/',
-        spec: 'static/swagger-19.json',
-      },
+      }
     ]: [],
     // Theme Options for modifying how redoc renders them
     theme: {
@@ -93,14 +89,10 @@ const config = {
               banner: 'unreleased',
             },
             '1.20': {
-              label: '1.20.0-rc2',
-              banner: 'none',
-            },
-            '1.19': {
-              label: '1.19.4',
+              label: '1.20.0',
             }
           },
-          lastVersion: '1.19',
+          lastVersion: '1.20',
           async sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
             const {item} = args;
             // Use the provided data to generate a custom sidebar slice
@@ -163,10 +155,10 @@ const config = {
             label: 'Docs',
           },
           {
-            to: '/api/1.19/',
+            to: '/api/1.20/',
             label: 'API',
             position: 'left',
-            activeBaseRegex: 'api/(1.19|1.20|next)/',
+            activeBaseRegex: 'api/(1.20|next)/',
           },
           {
             position: 'left',
@@ -181,8 +173,7 @@ const config = {
             position: 'right',
             items: [
               {to: '/api/next/', label: '1.21-dev' },
-              {to: '/api/1.20/', label: '1.20.0-rc2' },
-              {to: '/api/1.19/', label: '1.19.4' },
+              {to: '/api/1.20/', label: '1.20.0' }
             ],
           },
           {

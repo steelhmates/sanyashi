@@ -23,11 +23,8 @@ minNodeVer="16"
 minGoVer="1.20"
 goVer="1.20"
 minorVer="main-nightly"
-if [ "$version" == "1.19" ]; then
-    minorVer="1.19.4"
-    minGoVer="1.19"
-elif [ "$version" == "1.20" ]; then
-    minorVer="1.20.0-rc2"
+if [ "$version" == "1.20" ]; then
+    minorVer="1.20.0"
 fi
 
 docs_dir="versioned_docs/version-$version"
@@ -62,8 +59,6 @@ if [ "$version" == "latest" ]; then
     SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.21-dev"/' static/swagger-latest.json
 elif [ "$version" == "1.20" ]; then
     SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.20.0-rc2"/' static/swagger-20.json
-elif [ "$version" == "1.19" ]; then
-    SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.19.4"/' static/swagger-19.json
 fi
 SED_INPLACE 's/"basePath": "{{AppSubUrl | JSEscape | Safe}}/"basePath": "https:\/\/gitea.com/' static/swagger-"$1".json
 
