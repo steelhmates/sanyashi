@@ -221,15 +221,6 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/',
-              },
-            ],
-          },
-          {
             title: 'Community',
             items: [
               {
@@ -241,17 +232,33 @@ const config = {
                 href: 'https://discord.gg/gitea',
               },
               {
+                label: 'Matrix',
+                href: 'https://matrix.to/#/#gitea-space:matrix.org',
+              },
+              {
+                label: 'Discourse',
+                href: 'https://discourse.gitea.io/',
+              },
+              {
                 label: 'Twitter',
                 href: 'https://twitter.com/giteaio',
+              },
+              {
+                label: 'Mastodon',
+                href: 'https://social.gitea.io/@gitea',
               },
             ],
           },
           {
-            title: 'More',
+            title: 'Code',
             items: [
               {
-                label: 'Code',
+                label: 'GitHub',
                 href: 'https://github.com/go-gitea/gitea',
+              },
+              {
+                label: 'Gitea',
+                href: 'https://gitea.com/gitea',
               },
             ],
           },
