@@ -224,6 +224,10 @@ const config = {
             title: 'Community',
             items: [
               {
+                label: 'Awesome Gitea',
+                to: '/awesome',
+              },
+              {
                 label: 'Stack Overflow',
                 href: 'https://stackoverflow.com/questions/tagged/gitea',
               },
@@ -259,6 +263,10 @@ const config = {
               {
                 label: 'Gitea',
                 href: 'https://gitea.com/gitea',
+              },
+              {
+                label: 'Tea CLI',
+                href: 'https://gitea.com/gitea/tea',
               },
             ],
           },
