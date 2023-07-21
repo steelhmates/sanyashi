@@ -6,6 +6,25 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --font-size-small: 15px;
+  --font-size-normal: 16px;
+  --font-size-large: 17px;
+  --font-size-big-1: 22px;
+  --font-size-big-2: 24px;
+  --font-size-big-3: 32px;
+  --font-size-big-4: 46px;
+  --font-size-big-5: 64px;
+  --palette-dark-10: rgba(0, 0, 0, 0.1);
+  --palette-dark-20: rgba(0, 0, 0, 0.2);
+  --palette-dark-30: rgba(0, 0, 0, 0.3);
+  --palette-dark-40: rgba(0, 0, 0, 0.4);
+  --palette-dark-60: rgba(0, 0, 0, 0.6);
+  --palette-dark-80: rgba(0, 0, 0, 0.8);
+  --palette-white-10: rgba(255, 255, 255, 0.1);
+  --palette-white-20: rgba(255, 255, 255, 0.2);
+  --palette-charade: #21222c;
+  --palette-rock: #262833;
+  --palette-pale-blue: #b1b5d3;
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
@@ -14,11 +33,29 @@
   --ifm-color-primary-lighter: #359962;
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-global-border-radius: 8px;
+  --docusaurus-highlighted-code-line-bg: var(--palette-dark-10);
+  --theme-card-text-color: var(--palette-charade);
+  --theme-card-title-color: var(--palette-charade);
+  --theme-attention-card-bg-color: #f0f1f5;
+  --theme-attention-card-text-color: var(--ifm-color-white);
+  --theme-input-text-color: #555b88;
+  --theme-card-secondary-bg-color: #dde0e9;
+  --theme-button-primary-background-color: var(--ifm-color-primary);
+  --theme-button-primary-text-color: var(--ifm-color-white);
+  --theme-button-primary-hover-background-color: var(--ifm-color-primary-darker);
+  --theme-button-secondary-background-color: var(--palette-dark-10);
+  --theme-button-secondary-text-color: var(--palette-charade);
+  --theme-button-secondary-hover-background-color: var(--palette-dark-30);
+  --theme-button-tertiary-background-color: var(--palette-dark-30);
+  --theme-button-tertiary-text-color: var(--palette-dark-80);
+  --theme-button-tertiary-hover-background-color: var(--palette-dark-40);
+  --theme-input-bg-color: #f0f1f5;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
+  --palette-gray: #4b4e5d;
   --ifm-color-primary: #25c2a0;
   --ifm-color-primary-dark: #21af90;
   --ifm-color-primary-darker: #1fa588;
@@ -26,7 +63,20 @@
   --ifm-color-primary-light: #29d5b0;
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --docusaurus-highlighted-code-line-bg: var(--palette-dark-30);
+  --theme-attention-card-bg-color: var(--palette-gray);
+  --theme-input-bg-color: #44475a;
+  --theme-input-text-color: #b1b5d3;
+  --theme-card-secondary-bg-color: var(--palette-charade);
+  --theme-button-primary-background-color: var(--ifm-color-primary);
+  --theme-button-primary-text-color: var(--ifm-color-white);
+  --theme-button-primary-hover-background-color: var(--ifm-color-primary-darker);
+  --theme-button-secondary-background-color: var(--ifm-color-white);
+  --theme-button-secondary-text-color: var(--palette-charade);
+  --theme-button-secondary-hover-background-color: #d9d9d9;
+  --theme-button-tertiary-background-color: var(--palette-white-10);
+  --theme-button-tertiary-text-color: var(--ifm-color-white);
+  --theme-button-tertiary-hover-background-color: var(--palette-white-20);
 }
 
 [data-theme='dark'] [class*='announcementBar'] {

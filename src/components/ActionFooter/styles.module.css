@@ -1,0 +1,27 @@
+.loader {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.loader:after {
+  content: " ";
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-color: var(--ifm-color-white) transparent var(--ifm-color-white)
+    transparent;
+  animation: loader 1.2s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
