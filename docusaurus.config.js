@@ -93,7 +93,7 @@ const config = {
               banner: 'unreleased',
             },
             '1.20': {
-              label: '1.20.0'
+              label: '1.20.1'
             },
             '1.19': {
               label: '1.19.4',

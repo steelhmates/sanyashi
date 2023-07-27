@@ -33,9 +33,6 @@ jobs:
       - name: prepare awesome list
         run: |
           make prepare-awesome-latest prepare-awesome\#20 prepare-awesome\#19
-      - name: cleanup before build
-        run: |
-          rm static/_*
       - name: build site
         run: |
           make build

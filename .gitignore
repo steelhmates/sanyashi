@@ -22,11 +22,8 @@ yarn-error.log*
 .tmp/
 docs/
 versioned_docs/
-static/_headers
-static/_redirects
-static/swagger-latest.json
-static/swagger-19.json
-static/swagger-20.json
+# Static files other than those explicitly tracked
+/static 
 i18n/zh-cn/docusaurus-plugin-content-docs/current
 i18n/zh-cn/docusaurus-plugin-content-docs/version-1.19
 i18n/zh-cn/docusaurus-plugin-content-docs/version-1.20

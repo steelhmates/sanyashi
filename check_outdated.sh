@@ -22,7 +22,7 @@ locale="$2"
 cur_path=`pwd`
 cd .tmp/upstream-docs-"$version"
 
-for file in `find ./docs/content/doc -name "*.${locale}.md"`; do
+for file in `find ./docs/content -name "*.${locale}.md"`; do
     file_en="${file/.${locale}/.en-us}"
     if [ ! -f "$file_en" ]; then
         continue

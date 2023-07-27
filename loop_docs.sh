@@ -27,7 +27,7 @@ if [ "$version" == "1.19" ]; then
     minorVer="1.19.4"
     minGoVer="1.19"
 elif [ "$version" == "1.20" ]; then
-    minorVer="1.20.0"
+    minorVer="1.20.1"
 fi
 
 docs_dir="versioned_docs/version-$version"
@@ -43,44 +43,29 @@ else
     fi
 fi
 
-if [ -f "$docs_dir/installation/with-docker.$locale.md" ]; then
-    SED_INPLACE 's/\\<empty>/<empty\\>/' "$docs_dir/installation/with-docker.$locale.md"
-fi
-SED_INPLACE 's/\\<empty/<empty/' "$docs_dir/administration/config-cheat-sheet.$locale.md"
-SED_INPLACE 's/<empty>/<empty\\>/' "$docs_dir/administration/config-cheat-sheet.$locale.md"
-SED_INPLACE 's/^url:.*//' "$docs_dir/intro.md"
-SED_INPLACE 's/^slug:.*/slug: \//' "$docs_dir/intro.md"
-SED_INPLACE "s/{{< min-node-version >}}/$minNodeVer/" "$docs_dir/development/hacking-on-gitea.$locale.md"
-SED_INPLACE "s/{{< min-go-version >}}/$minGoVer/" "$docs_dir/development/hacking-on-gitea.$locale.md"
-SED_INPLACE "s/{{< go-version >}}/$goVer/" "$docs_dir/development/hacking-on-gitea.$locale.md"
-SED_INPLACE "s/{{< min-node-version >}}/$minNodeVer/" "$docs_dir/installation/from-source.$locale.md"
-SED_INPLACE "s/{{< min-go-version >}}/$minGoVer/" "$docs_dir/installation/from-source.$locale.md"
+SED_INPLACE "s/@minNodeVersion@/$minNodeVer/" "$docs_dir/development/hacking-on-gitea.$locale.md"
+SED_INPLACE "s/@minGoVersion@/$minGoVer/" "$docs_dir/development/hacking-on-gitea.$locale.md"
+SED_INPLACE "s/@goVersion@/$goVer/" "$docs_dir/development/hacking-on-gitea.$locale.md"
+SED_INPLACE "s/@minNodeVersion@/$minNodeVer/" "$docs_dir/installation/from-source.$locale.md"
+SED_INPLACE "s/@minGoVersion@/$minGoVer/" "$docs_dir/installation/from-source.$locale.md"
 
 # TODO: improve this sed
 # need confirmation
 if [ "$version" == "latest" ]; then
     SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.21-dev"/' static/swagger-latest.json
 elif [ "$version" == "1.20" ]; then
-    SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.20.0-rc2"/' static/swagger-20.json
+    SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.20.1"/' static/swagger-20.json
 elif [ "$version" == "1.19" ]; then
     SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.19.4"/' static/swagger-19.json
 fi
 SED_INPLACE 's/"basePath": "{{AppSubUrl | JSEscape | Safe}}/"basePath": "https:\/\/gitea.com/' static/swagger-"$1".json
 
 for file in `find ./"$docs_dir" -name "*.md"`; do
-    # hide hugo toc
-    SED_INPLACE 's/{{< toc >}}//' $file
     if [ "$version" == "lastest" ]; then
-      SED_INPLACE 's/dl.gitea.com\/gitea\/{{< version >}}/dl.gitea.com\/gitea\/main/g' $file
-      SED_INPLACE 's/gitea\/gitea\:{{< version >}}/gitea\/gitea\:nightly/g' $file
+      SED_INPLACE 's/dl.gitea.com\/gitea\/@version@/dl.gitea.com\/gitea\/main/g' $file
+      SED_INPLACE 's/gitea\/gitea\:@version@/gitea\/gitea\:nightly/g' $file
     fi
-    SED_INPLACE "s/{{< version >}}/$version/g" $file
-    SED_INPLACE 's/{{< relref "doc\///g' $file
-    SED_INPLACE "s/.$locale.md/.md/g" $file
-    SED_INPLACE 's/" >}}//g' $file
-    SED_INPLACE 's/\*\*Table of Contents\*\*//' $file
-    SED_INPLACE 's/weight:/sidebar_position:/g' $file
-    #sed -i 's/^slug:.*//' $file
+    SED_INPLACE "s/@version@/$version/g" $file
 done
 
 for file in "$docs_dir"/*; do
