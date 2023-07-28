@@ -65,7 +65,7 @@ for file in `find ./"$docs_dir" -name "*.md"`; do
       SED_INPLACE 's/dl.gitea.com\/gitea\/@version@/dl.gitea.com\/gitea\/main/g' $file
       SED_INPLACE 's/gitea\/gitea\:@version@/gitea\/gitea\:nightly/g' $file
     fi
-    SED_INPLACE "s/@version@/$version/g" $file
+    SED_INPLACE "s/@version@/$minorVer/g" $file
 done
 
 for file in "$docs_dir"/*; do
