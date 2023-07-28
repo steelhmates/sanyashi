@@ -7,6 +7,10 @@ all: build
 create_dir:
 	mkdir -p .tmp docs versioned_docs awesome
 
+.PHONY: clone
+clone: create_dir
+	git clone https://github.com/go-gitea/gitea.git .tmp/upstream-docs || true
+
 .PHONY: clone_awesome
 clone_awesome: create_dir
 	git clone --branch=main https://gitea.com/gitea/awesome-gitea.git .tmp/upstream-awesome || true
@@ -20,56 +24,50 @@ prepare-awesome\#%:
 	cp .tmp/upstream-awesome/README.md  versioned_docs/version-1.$*/awesome.md
 
 .PHONY: clone_main
-clone_main: create_dir
-	git clone --branch=main https://github.com/go-gitea/gitea.git .tmp/upstream-docs-latest
+clone_main: clone
+	cd .tmp/upstream-docs && git clean -f && git reset --hard && git checkout main
 	cur_path=`pwd`
-	cd .tmp/upstream-docs-latest/docs && bash scripts/trans-copy.sh
+	cd .tmp/upstream-docs/docs && bash scripts/trans-copy.sh
 	cd $(cur_path)
-	bash check_outdated.sh latest zh-cn
+	bash check_outdated.sh zh-cn
 
 .PHONY: prepare-latest
 prepare-latest: clone_main
-	cp -r .tmp/upstream-docs-latest/docs/static/* static/
-	rsync -avz --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/ docs/
-	cp .tmp/upstream-docs-latest/docs/content/index.en-us.md docs/intro.md
-	cp .tmp/upstream-docs-latest/templates/swagger/v1_json.tmpl static/swagger-latest.json
+	cp -r .tmp/upstream-docs/docs/static/* static/
+	rsync -avz --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs/docs/content/ docs/
+	cp .tmp/upstream-docs/docs/content/index.en-us.md docs/intro.md
+	cp .tmp/upstream-docs/templates/swagger/v1_json.tmpl static/swagger-latest.json
 	bash loop_docs.sh latest en-us
 
 .PHONY: prepare-latest-zh-cn
 prepare-latest-zh-cn:
-	# clone_main
-	# cp -r .tmp/upstream-docs-latest/docs/static/* static/
 	mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/current
-	rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs-latest/docs/content/ i18n/zh-cn/docusaurus-plugin-content-docs/current/
-	cp .tmp/upstream-docs-latest/docs/content/index.zh-cn.md i18n/zh-cn/docusaurus-plugin-content-docs/current/intro.md
+	rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs/docs/content/ i18n/zh-cn/docusaurus-plugin-content-docs/current/
+	cp .tmp/upstream-docs/docs/content/index.zh-cn.md i18n/zh-cn/docusaurus-plugin-content-docs/current/intro.md
 	bash loop_docs.sh latest zh-cn
-	rm -rf .tmp/upstream-docs-latest
 
 .PHONY: clone_\#%
-clone_\#%: create_dir
-	git clone --branch=release/v1.$* https://github.com/go-gitea/gitea.git .tmp/upstream-docs-$*
+clone_\#%: clone
+	cd .tmp/upstream-docs && git clean -f && git reset --hard && git checkout release/v1.$*
 	cur_path=`pwd`
-	cd .tmp/upstream-docs-$*/docs && bash scripts/trans-copy.sh
+	cd .tmp/upstream-docs/docs && bash scripts/trans-copy.sh
 	cd $(cur_path)
-	bash check_outdated.sh $* zh-cn
+	bash check_outdated.sh zh-cn
 
 .PHONY: prepare\#%
 prepare\#%: clone_\#%
-	cp -r .tmp/upstream-docs-$*/docs/static/* static/
-	rsync -a --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs-$*/docs/content/ versioned_docs/version-1.$*/
-	cp .tmp/upstream-docs-$*/docs/content/index.en-us.md versioned_docs/version-1.$*/intro.md
-	cp .tmp/upstream-docs-$*/templates/swagger/v1_json.tmpl static/swagger-$*.json
+	cp -r .tmp/upstream-docs/docs/static/* static/
+	rsync -a --prune-empty-dirs --include '*/' --include='*.en-us.md' --exclude '*' .tmp/upstream-docs/docs/content/ versioned_docs/version-1.$*/
+	cp .tmp/upstream-docs/docs/content/index.en-us.md versioned_docs/version-1.$*/intro.md
+	cp .tmp/upstream-docs/templates/swagger/v1_json.tmpl static/swagger-$*.json
 	bash loop_docs.sh $* en-us
 
 .PHONY: prepare-zh-cn\#%
 prepare-zh-cn\#%:
-	# clone_\#%
-	# cp -r .tmp/upstream-docs-$*/docs/static/* static/
 	mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*
-	rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs-$*/docs/content/ i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*/
-	cp .tmp/upstream-docs-$*/docs/content/index.zh-cn.md i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*/intro.md
+	rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs/docs/content/ i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*/
+	cp .tmp/upstream-docs/docs/content/index.zh-cn.md i18n/zh-cn/docusaurus-plugin-content-docs/version-1.$*/intro.md
 	bash loop_docs.sh $* zh-cn
-	rm -rf .tmp/upstream-docs-$*
 
 .PHONY: install
 install:

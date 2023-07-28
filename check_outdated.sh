@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# The script takes two params: 
-#     version: "latest" or a specific version number
-#     locale
-# This script checks if a specific locale version of document is up to date with English version
+# This script takes `locale` as a param and checks if a specific locale version of document is up to date with English version
 # If latest commit timestamp of English version is greater than the specific locale version,
 # The specific locale version document will be marked as outdated
 
@@ -17,10 +14,9 @@ SED_INPLACE() {
   fi
 }
 
-version="$1"
-locale="$2"
+locale="$1"
 cur_path=`pwd`
-cd .tmp/upstream-docs-"$version"
+cd .tmp/upstream-docs
 
 for file in `find ./docs/content -name "*.${locale}.md"`; do
     file_en="${file/.${locale}/.en-us}"
