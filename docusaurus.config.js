@@ -80,7 +80,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/', // Serve the docs at the site's root
           editUrl: ({versionDocsDirPath, docPath, locale, version, permalink}) => {
-            let fileName = `doc/${docPath.replace('.md', '')}.${locale}.md`;
+            let fileName = `${docPath.replace('.md', '')}.${locale}.md`;
             // intro.md has different name from upstream, need to handle this here
             if (docPath.includes('intro.md')) {
               fileName = `page/index.${locale}.md`;
