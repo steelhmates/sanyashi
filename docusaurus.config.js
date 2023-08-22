@@ -57,6 +57,15 @@ const config = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.png',
 
+  plugins: [
+    [
+      'docusaurus-plugin-plausible',
+      {
+        domain: 'docs.gitea.com',
+      },
+    ]
+  ],
+
   i18n: {
     defaultLocale: 'en-us',
     locales: ['en-us', 'zh-cn'/*, 'fr-fr', 'zh-tw'*/], // temporarily disable other locales
