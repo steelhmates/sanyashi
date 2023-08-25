@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron:  '0 */6 * * *' # every six hours on the hour
 
 jobs:
   build-docs:
