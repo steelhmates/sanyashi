@@ -106,7 +106,7 @@ const config = {
               banner: 'unreleased',
             },
             '1.21': {
-              label: '1.21-rc0',
+              label: '1.21.0-rc0',
             },
             '1.20': {
               label: '1.20.4'
@@ -181,7 +181,7 @@ const config = {
             to: '/api/1.20/',
             label: 'API',
             position: 'left',
-            activeBaseRegex: 'api/(1.19|1.20|next)/',
+            activeBaseRegex: 'api/(1.19|1.20|1.21|next)/',
           },
           {
             position: 'left',
@@ -196,8 +196,8 @@ const config = {
             position: 'right',
             items: [
               {to: '/api/next/', label: '1.22-dev' },
-              {to: '/api/1.21/', label: '1.21-rc0' },
-              {to: '/api/1.20/', label: '1.20.0' },
+              {to: '/api/1.21/', label: '1.21.0-rc0' },
+              {to: '/api/1.20/', label: '1.20.4' },
               {to: '/api/1.19/', label: '1.19.4' },
             ],
           },

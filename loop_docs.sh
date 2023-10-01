@@ -28,6 +28,8 @@ if [ "$version" == "1.19" ]; then
     minGoVer="1.19"
 elif [ "$version" == "1.20" ]; then
     minorVer="1.20.4"
+elif [ "$version" == "1.21" ]; then
+    minorVer="1.21.0-rc0"
 fi
 
 docs_dir="versioned_docs/version-$version"
@@ -54,7 +56,7 @@ SED_INPLACE "s/@minGoVersion@/$minGoVer/" "$docs_dir/installation/from-source.$l
 if [ "$version" == "latest" ]; then
     SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.22-dev"/' static/swagger-latest.json
 elif [ "$version" == "1.21" ]; then
-    SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.21-rc0"/' static/swagger-21.json
+    SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.21.0-rc0"/' static/swagger-21.json
 elif [ "$version" == "1.20" ]; then
     SED_INPLACE 's/"version": "{{AppVer | JSEscape | Safe}}"/"version": "1.20.4"/' static/swagger-20.json
 elif [ "$version" == "1.19" ]; then
