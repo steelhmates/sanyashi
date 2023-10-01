@@ -25,6 +25,10 @@ const apiConfig = [
         route: '/api/next/',
       },
       {
+        route: '/api/1.21/',
+        spec: 'static/swagger-21.json',
+      },
+      {
         route: '/api/1.20/',
         spec: 'static/swagger-20.json',
       },
@@ -98,8 +102,11 @@ const config = {
           },
           versions: {
             current: {
-              label: '1.21-dev', // path is kept as next for dev (so users can always find "nightly" docs)
+              label: '1.22-dev', // path is kept as next for dev (so users can always find "nightly" docs)
               banner: 'unreleased',
+            },
+            '1.21': {
+              label: '1.21-rc0',
             },
             '1.20': {
               label: '1.20.4'
@@ -188,7 +195,8 @@ const config = {
             label: 'API Version',
             position: 'right',
             items: [
-              {to: '/api/next/', label: '1.21-dev' },
+              {to: '/api/next/', label: '1.22-dev' },
+              {to: '/api/1.21/', label: '1.21-rc0' },
               {to: '/api/1.20/', label: '1.20.0' },
               {to: '/api/1.19/', label: '1.19.4' },
             ],
@@ -249,8 +257,8 @@ const config = {
                 href: 'https://matrix.to/#/#gitea-space:matrix.org',
               },
               {
-                label: 'Discourse',
-                href: 'https://discourse.gitea.io/',
+                label: 'Forum',
+                href: 'https://forum.gitea.com/',
               },
               {
                 label: 'Twitter',

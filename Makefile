@@ -94,3 +94,4 @@ clean:
 	rm -rf static/swagger-latest.json
 	rm -rf static/swagger-19.json
 	rm -rf static/swagger-20.json
+	rm -rf static/swagger-21.json
