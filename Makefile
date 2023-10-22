@@ -41,7 +41,7 @@ prepare-latest: clone_main
 
 .PHONY: prepare-latest-zh-cn
 prepare-latest-zh-cn:
-	mkdir -p i18n/zh-cn/docusaurus-plugin-content-docs/current
+	mkdir -p i18n/zh-cn/docusaurus-plugin-contjunt-docs/current
 	rsync -avz --prune-empty-dirs --include '*/' --include='*.zh-cn.md' --exclude '*' .tmp/upstream-docs/docs/content/ i18n/zh-cn/docusaurus-plugin-content-docs/current/
 	cp .tmp/upstream-docs/docs/content/index.zh-cn.md i18n/zh-cn/docusaurus-plugin-content-docs/current/intro.md
 	bash loop_docs.sh latest zh-cn
