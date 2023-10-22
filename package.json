@@ -12,7 +12,7 @@
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
+    "write-translations": "docusaurus write-tratdlations",
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
